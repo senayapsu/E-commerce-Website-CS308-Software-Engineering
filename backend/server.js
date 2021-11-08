@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import userRouter from './routers/userRouter.js';
 import config from 'config';
 
+//singin 3-> dotenv.config() ve import dotenv
 dotenv.config();
 //const mongodburl = config.mongodburl;
 
@@ -13,7 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-mongoose.connect('mongodb://localhost/amazona',{
+mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/amazona',{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     //useCreateIndex: true,

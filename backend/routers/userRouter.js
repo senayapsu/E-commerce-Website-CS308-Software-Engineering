@@ -11,12 +11,13 @@ const userRouter = express.Router();
 userRouter.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {
-    // await User.remove({});
+    //await User.remove({});
     const createdUsers = await User.insertMany(data.users);
     res.send({ createdUsers });
   })
 );
 
+//signin page 1-> create router 
 userRouter.post(
   '/signin',
   expressAsyncHandler(async (req, res) => {
@@ -37,6 +38,7 @@ userRouter.post(
   })
 );
 //for register page, we have done only this in backend
+/*
 userRouter.post(
   '/register',
   expressAsyncHandler(async (req, res) => {
@@ -55,4 +57,5 @@ userRouter.post(
     });
   })
 );
+*/
 export default userRouter;
