@@ -35,12 +35,13 @@ class SignUpForm extends Component {
 
   render() {
     return (
-      <div className="formCenter">
+      <div className="formCenter" style={{ display: 'flex', justifyContent: 'center', padding: 100 }}>
         <form onSubmit={this.handleSubmit} className="formFields">
-          <div className="formField">
+          <div className="formField" style={{ display: 'flex', justifyContent: 'left', padding: 20 }}>
             <label className="formFieldLabel" htmlFor="name">
-              Full Name
+              Full Name:
             </label>
+            <div style={{ margin: 10 }}> </div>
             <input
               type="text"
               id="name"
@@ -51,10 +52,11 @@ class SignUpForm extends Component {
               onChange={this.handleChange}
             />
           </div>
-          <div className="formField">
+          <div className="formField" style={{ display: 'flex', justifyContent: 'left', padding: 20 }}>
             <label className="formFieldLabel" htmlFor="password">
-              Password
+              Password:
             </label>
+            <div style={{ margin: 10 }}> </div>
             <input
               type="password"
               id="password"
@@ -65,10 +67,11 @@ class SignUpForm extends Component {
               onChange={this.handleChange}
             />
           </div>
-          <div className="formField">
+          <div className="formField" style={{ display: 'flex', justifyContent: 'left', padding: 20 }}>
             <label className="formFieldLabel" htmlFor="email">
-              E-Mail Address
+              E-Mail Address:
             </label>
+            <div style={{ margin: 10 }}> </div>
             <input
               type="email"
               id="email"
@@ -80,7 +83,7 @@ class SignUpForm extends Component {
             />
           </div>
 
-          <div className="formField">
+          <div className="formField" style={{ display: 'flex', justifyContent: 'left', padding: 20 }}>
             <label className="formFieldCheckboxLabel">
               <input
                 className="formFieldCheckbox"
@@ -96,9 +99,10 @@ class SignUpForm extends Component {
             </label>
           </div>
 
-          <div className="formField">
+          <div className="formField" style={{ display: 'flex', justifyContent: 'left', padding: 5, margin: 10 }}>
             <button className="formFieldButton">Sign Up</button>{" "}
-            <Link to="/sign-in" className="formFieldLink">
+            <div style={{ margin: 5 }}> </div>
+            <Link to="/Login" className="formFieldLink">
               I'm already member
             </Link>
           </div>
