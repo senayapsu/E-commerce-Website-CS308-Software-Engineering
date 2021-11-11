@@ -9,7 +9,7 @@ const userRouter = express.Router();
 
 //get method to see API
 userRouter.get(
-  '/Login',
+  '/seed',
   expressAsyncHandler(async (req, res) => {
     //await User.remove({});
     const createdUsers = await User.insertMany(data.users);
