@@ -31,9 +31,11 @@ userRouter.post(
           isAdmin: user.isAdmin,
           token: generateToken(user),
         });
+        console.log("User is true");
         return;
       }
     }
+    console.log("Invalid email or password");
     res.status(401).send({ message: 'Invalid email or password' });
   })
 );

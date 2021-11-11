@@ -4,6 +4,7 @@ import {
   FacebookLoginButton,
   InstagramLoginButton
 } from "react-social-login-buttons";
+import Facebook from "./Facebook";
 
 class SignInForm extends Component {
   constructor() {
@@ -39,10 +40,11 @@ class SignInForm extends Component {
     return (
       <div className="formCenter" style={{ display: 'flex', justifyContent: 'center', padding: 100 }}>
         <form className="formFields" onSubmit={this.handleSubmit}>
-          <div className="formField" style={{ display: 'flex', justifyContent: 'center', padding: 20 }}>
+          <div className="formField" style={{ display: 'flex', justifyContent: 'left', padding: 20 }}>
             <label className="formFieldLabel" htmlFor="email">
-              E-Mail Address
+              E-Mail Address:
             </label>
+            <div style={{ margin: 10 }}> </div>
             <input
               type="email"
               id="email"
@@ -54,10 +56,11 @@ class SignInForm extends Component {
             />
           </div>
 
-          <div className="formField" style={{ display: 'flex', justifyContent: 'center', padding: 20 }}>
+          <div className="formField" style={{ display: 'flex', justifyContent: 'left', padding: 20 }}>
             <label className="formFieldLabel" htmlFor="password">
-              Password
+              Password:
             </label>
+            <div style={{ margin: 10 }}> </div>
             <input
               type="password"
               id="password"
@@ -69,22 +72,16 @@ class SignInForm extends Component {
             />
           </div>
 
-          <div className="formField">
+          <div className="formField" style={{ margin: 20 }}>
             <button className="formFieldButton">Sign In</button>{" "}
             <Link to="/SignUp" className="formFieldLink">
               Create an account
             </Link>
           </div>
 
-          <div className="socialMediaButtons">
-            <div className="facebookButton">
-              <FacebookLoginButton onClick={() => alert("Facebook")} />
+          <div style={{ display: 'flex', justifyContent: 'center', padding: 20 }}>
+            <Facebook/>
             </div>
-
-            <div className="instagramButton">
-              <InstagramLoginButton onClick={() => alert("Instagram")} />
-            </div>
-          </div>
         </form>
       </div>
     );
