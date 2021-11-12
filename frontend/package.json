@@ -9,8 +9,12 @@
     "react-dom": "^16.9.0",
     "react-facebook-login": "^4.1.1",
     "react-router-dom": "^5.0.1",
+<<<<<<< HEAD
     "react-scripts": "3.1.0",
     "react-social-login-buttons": "^3.6.0"
+=======
+    "react-scripts": "3.1.0"
+>>>>>>> fd6e02a4aaf3082f2541ef8bb59b5103f2f667dc
   },
   "scripts": {
     "start": "react-scripts start",
@@ -32,10 +36,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+<<<<<<< HEAD
   },
   "main": "index.js",
   "devDependencies": {},
   "author": "",
   "license": "ISC",
   "description": ""
+=======
+  }
+>>>>>>> fd6e02a4aaf3082f2541ef8bb59b5103f2f667dc
 }
