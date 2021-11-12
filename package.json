@@ -23,5 +23,13 @@
     "eslint": "^8.1.0",
     "nodemon": "^2.0.14"
   },
-  "description": ""
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/senayapsu/cs308_team.git"
+  },
+  "bugs": {
+    "url": "https://github.com/senayapsu/cs308_team/issues"
+  },
+  "homepage": "https://github.com/senayapsu/cs308_team#readme"
 }
