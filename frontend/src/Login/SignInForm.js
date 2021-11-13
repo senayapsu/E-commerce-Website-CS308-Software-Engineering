@@ -12,7 +12,8 @@ class SignInForm extends Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      isLoaded: true,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -35,7 +36,29 @@ class SignInForm extends Component {
     console.log("The form was submitted with the following data:");
     console.log(this.state);
   }
-
+  signIn() {
+    const settings = {
+      method: 'POST',
+      headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+      },
+      
+  }
+    fetch("http://localhost:5000/api/users/signin")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log({result});
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          
+        }
+      )
+  }
   render() {
     return (
       <div className="formCenter" style={{ display: 'flex', justifyContent: 'center', padding: 100 }}>
@@ -73,7 +96,7 @@ class SignInForm extends Component {
           </div>
 
           <div className="formField" style={{ margin: 20 }}>
-            <button className="formFieldButton">Sign In</button>{" "}
+            <button className="formFieldButton" onClick = {this.signIn}>Sign In</button>{" "}
             <Link to="/SignUp" className="formFieldLink">
               Create an account
             </Link>
