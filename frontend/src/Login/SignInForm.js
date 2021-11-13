@@ -11,9 +11,10 @@ class SignInForm extends Component {
     super();
 
     this.state = {
+      //name: "",
       email: "",
       password: "",
-      isLoaded: true,
+      //isAdmin: true,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -37,6 +38,7 @@ class SignInForm extends Component {
     console.log(this.state);
   }
   signIn() {
+    console.log("geldi");
     const settings = {
       method: 'POST',
       headers: {
@@ -45,7 +47,7 @@ class SignInForm extends Component {
       },
       
   }
-    fetch("http://localhost:5000/api/users/signin")
+    fetch("/api/users/signin")
       .then(res => res.json())
       .then(
         (result) => {
