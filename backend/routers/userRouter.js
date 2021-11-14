@@ -7,7 +7,8 @@ import { generateToken } from '../utils.js';
 
 const userRouter = express.Router();
 
-//get method to see API
+//http://localhost:5000/api/users/seed
+//userları görmek için get metodu
 userRouter.get(
   '/seed',
   expressAsyncHandler(async (req, res) => {
@@ -17,7 +18,8 @@ userRouter.get(
   })
 );
 
-//signin page 1-> create router 
+//http://localhost:5000/api/users/signin
+//Signin post method
 userRouter.post(
   '/signin',
   expressAsyncHandler(async (req, res) => {
@@ -39,13 +41,15 @@ userRouter.post(
     res.status(401).send({ message: 'Invalid email or password' });
   })
 );
-//for register page, we have done only this in backend
-/*
+
+//http://localhost:5000/api/users/register
+//Register post method
 userRouter.post(
   '/register',
   expressAsyncHandler(async (req, res) => {
     const user = new User({
       name: req.body.name,
+      username: req.body.username,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 8),
     });
@@ -59,5 +63,5 @@ userRouter.post(
     });
   })
 );
-*/
+
 export default userRouter;

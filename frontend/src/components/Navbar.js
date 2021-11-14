@@ -3,12 +3,12 @@ import './Navbar.css';
 import { Navbar, Nav, Form, Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import logo from "../assets/logo2.jpeg"
-import Container from 'react-bootstrap/Container'
+
 
 const Navigation = (props) => {
     console.log(props);
     return (
-        <Navbar style = {{backgroundColor: "#0F5A34"}} expand="-xl" variant="dark">
+        <Navbar style = {{backgroundColor: "#0F5A34"}} expand="-xl" variant="dark" height= '100px'>
             <Navbar.Brand href="/">
             <img
                 src = {logo}
@@ -29,6 +29,7 @@ const Navigation = (props) => {
                     <Nav.Link href="/">Design Ideas</Nav.Link>
                     <Nav.Link href="/Login">Login</Nav.Link>
                     <Nav.Link href="/Products">Likes</Nav.Link>
+                    <Nav.Link href="/Products">Cart</Nav.Link>
                 </Nav>
                 
 

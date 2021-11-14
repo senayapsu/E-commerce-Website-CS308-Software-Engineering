@@ -1,5 +1,5 @@
 {
-  "name": "amazona",
+  "name": "cs308_team",
   "type": "module",
   "version": "1.0.0",
   "main": "index.js",
@@ -12,6 +12,7 @@
     "bcryptjs": "^2.4.3",
     "config": "^3.3.6",
     "config-js": "^1.1.15",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-async-handler": "^1.2.0",
@@ -21,7 +22,15 @@
   },
   "devDependencies": {
     "eslint": "^8.1.0",
-    "nodemon": "^2.0.14"
+    "nodemon": "^2.0.15"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/senayapsu/cs308_team.git"
+  },
+  "bugs": {
+    "url": "https://github.com/senayapsu/cs308_team/issues"
+  },
+  "homepage": "https://github.com/senayapsu/cs308_team#readme",
   "description": ""
 }

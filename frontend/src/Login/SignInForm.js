@@ -5,6 +5,7 @@ import {
   InstagramLoginButton
 } from "react-social-login-buttons";
 import Facebook from "./Facebook";
+import axios from "axios";
 
 class SignInForm extends Component {
   constructor() {
@@ -37,29 +38,19 @@ class SignInForm extends Component {
     console.log("The form was submitted with the following data:");
     console.log(this.state);
   }
+ 
   signIn() {
-    console.log("geldi");
-    const settings = {
-      method: 'POST',
-      headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-      },
-      
-  }
-    fetch("/api/users/signin")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          console.log({result});
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          
-        }
-      )
+    var body = {
+      email: "daedd",
+      password: "1238",
+   };
+    axios.post('https://dashboard.heroku.com/apps/cs308team', body)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
   render() {
     return (
