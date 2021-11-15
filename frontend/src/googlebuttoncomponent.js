@@ -11,7 +11,7 @@ class GoogleLoginComponent extends Component {
       isLoggedIn: false,
       userInfo: {
         name: "",
-        emailId: "",y
+        emailId: "",
       },
     };
   }

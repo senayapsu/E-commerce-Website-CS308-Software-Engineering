@@ -2,7 +2,7 @@ import React from 'react';
 import './Navbar.css';
 import { Navbar, Nav, Form, Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
-import logo from "../assets/logo2.jpeg"
+import logo from "../assets/logo2.jpeg";
 
 
 const Navigation = (props) => {
