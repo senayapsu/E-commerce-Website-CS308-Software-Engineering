@@ -5,8 +5,8 @@ import {
   InstagramLoginButton
 } from "react-social-login-buttons";
 import Facebook from "./Facebook";
+import GoogleLoginComponent from "../googlebuttoncomponent";
 import axios from "axios";
-
 class SignInForm extends Component {
   constructor() {
     super();
@@ -21,6 +21,7 @@ class SignInForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  
 
   handleChange(event) {
     let target = event.target;
@@ -54,6 +55,7 @@ class SignInForm extends Component {
   }
   render() {
     return (
+      
       <div className="formCenter" style={{ display: 'flex', justifyContent: 'center', padding: 100 }}>
         <form className="formFields" onSubmit={this.handleSubmit}>
           <div className="formField" style={{ display: 'flex', justifyContent: 'left', padding: 20 }}>
@@ -97,11 +99,15 @@ class SignInForm extends Component {
 
           <div style={{ display: 'flex', justifyContent: 'center', padding: 20 }}>
             <Facebook/>
-            </div>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center', padding: 20 }}>
+              <GoogleLoginComponent />
+          </div>
         </form>
       </div>
+          
+      
     );
   }
 }
-
 export default SignInForm;
