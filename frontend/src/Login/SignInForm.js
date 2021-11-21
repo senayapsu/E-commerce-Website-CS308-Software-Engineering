@@ -1,21 +1,17 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import {
-  FacebookLoginButton,
-  InstagramLoginButton
-} from "react-social-login-buttons";
 import Facebook from "./Facebook";
 import GoogleLoginComponent from "../googlebuttoncomponent";
 import axios from "axios";
+
+
 class SignInForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      //name: "",
       email: "",
-      password: "",
-      //isAdmin: true,
+      password: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -24,12 +20,8 @@ class SignInForm extends Component {
   
 
   handleChange(event) {
-    let target = event.target;
-    let value = target.type === "checkbox" ? target.checked : target.value;
-    let name = target.name;
-
     this.setState({
-      [name]: value
+      [event.target.name]: event.target.value
     });
   }
 
@@ -38,21 +30,36 @@ class SignInForm extends Component {
 
     console.log("The form was submitted with the following data:");
     console.log(this.state);
+    axios
+      .post('http://localhost:3003/add_user',
+        {
+          "username": "as",
+          "profile_image": "asef.jpeg",
+          "name": "des",
+          "email": this.state.email,
+          "password": this.state.password,
+          "isAdmin": false
+        })
+        .then(response => {
+          console.log("in response");
+          console.log(response);
+          /*
+          if (response) { // backend den gelen mesaji kontrol et
+            this.props.handleSuccess
+          }
+          */
+          this.props.history.push("/");
+        }
+        )
+        .catch(function (error) {
+          console.log("in error");
+          console.log(error.response.data);
+        });
   }
  
   signIn() {
-    var body = {
-      email: "daedd",
-      password: "1238",
-   };
-    axios.post('https://dashboard.heroku.com/apps/cs308team', body)
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
+      
+    }
   render() {
     return (
       
@@ -91,10 +98,14 @@ class SignInForm extends Component {
           </div>
 
           <div className="formField" style={{ margin: 20 }}>
-            <button className="formFieldButton" onClick = {this.signIn}>Sign In</button>{" "}
+          
+            <button className="formFieldButton" type="submit">Sign In</button>{" "}
+
+            
             <Link to="/SignUp" className="formFieldLink">
               Create an account
             </Link>
+       
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'center', padding: 20 }}>

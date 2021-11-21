@@ -8,6 +8,7 @@ import Products from "./Product/Products";
 import Home from "./Home/Home";
 import history from './history';
 import SignUpForm from "./Login/SignUpForm";
+import Cart from "./CartPage/CartPage";
 
 export default class Routes extends Component {
     render() {
@@ -20,6 +21,7 @@ export default class Routes extends Component {
                     <Route path="/Products" component={Products} />
                     <Route path="/Login" component={Login} />
                     <Route path="/SignUp" component={SignUpForm} />
+                    <Route path="/CartPage" component={Cart} />
                 </Switch>
             </Router>
         )

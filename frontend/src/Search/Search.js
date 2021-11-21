@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Categories from "../components/Categories"
 
 const Search = () => (
     <div style={{justifyContent: 'center' }}> 
@@ -18,6 +18,7 @@ const Search = () => (
         />
         <button type="submit">Search</button>
     </form>
+    <Categories/>
     </div>
     
 );

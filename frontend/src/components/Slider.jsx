@@ -100,7 +100,9 @@ export const Slider = () => {
                     <InfoContainer>
                         <Title>{item.title}</Title>
                         <Desc>{item.desc}</Desc>
+                        <form action="/Products" method="get">
                         <Button>Our Products</Button>
+                        </form>
                     </InfoContainer>
                 </Slide>
                 ))}
