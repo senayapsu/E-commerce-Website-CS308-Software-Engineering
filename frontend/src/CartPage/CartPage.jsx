@@ -188,13 +188,13 @@ const CartPage = () => {
                     <SummaryTitle>ORDER SUMMARY</SummaryTitle>
                     <SummaryItem>
                         <SummaryItemText>Total</SummaryItemText>
-                        <SummaryItemPrice>$80</SummaryItemPrice>
+                        <SummaryItemPrice>$60</SummaryItemPrice>
                     </SummaryItem>
                     <SummaryItem>
                         <SummaryItemText>Estimated Shipping</SummaryItemText>
                         <SummaryItemPrice>$5</SummaryItemPrice>
                     </SummaryItem>
-                    <SummaryButton>CHECKOUT NOW</SummaryButton>
+                    <SummaryButton>BUY</SummaryButton>
                     </Summary>
                 </Bottom>
             </Wrapper>

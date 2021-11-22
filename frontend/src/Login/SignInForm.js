@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Facebook from "./Facebook";
 import GoogleLoginComponent from "../googlebuttoncomponent";
 import axios from "axios";
-
+import background from '../assets/soft.jpg';
 
 class SignInForm extends Component {
   constructor(props) {
@@ -63,8 +63,11 @@ class SignInForm extends Component {
   render() {
     return (
       
-      <div className="formCenter" style={{ display: 'flex', justifyContent: 'center', padding: 100 }}>
-        <form className="formFields" onSubmit={this.handleSubmit}>
+      <div className="formCenter" style={{ display: 'flex', justifyContent: 'center', padding: 70 }}>
+        <div>
+          <h1 style={{ display: 'flex', justifyContent: 'center', padding: 20, color: "#83A092" }}>Welcome to LAPPS</h1>
+       
+        <form className="formFields" onSubmit={this.handleSubmit} style={{backgroundImage:`url(${background})`, padding: 80}}>
           <div className="formField" style={{ display: 'flex', justifyContent: 'left', padding: 20 }}>
             <label className="formFieldLabel" htmlFor="email">
               E-Mail Address:
@@ -79,6 +82,7 @@ class SignInForm extends Component {
               value={this.state.email}
               onChange={this.handleChange}
             />
+            
           </div>
 
           <div className="formField" style={{ display: 'flex', justifyContent: 'left', padding: 20 }}>
@@ -114,7 +118,9 @@ class SignInForm extends Component {
           <div style={{ display: 'flex', justifyContent: 'center', padding: 20 }}>
               <GoogleLoginComponent />
           </div>
+
         </form>
+        </div>
       </div>
           
       

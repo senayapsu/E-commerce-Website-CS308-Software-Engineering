@@ -7,6 +7,7 @@ export const sliderItems =
         title:"WELCOME TO LAPSS",
         desc: "Landscape Produts E-commerce Site",
         bg: "8B0E45",
+        btn: "OUR PRODUCTS"
     },
     {
         id: 2,
@@ -14,6 +15,7 @@ export const sliderItems =
         title:"NATURE",
         desc: "Inspired by nature...",
         bg: "855818",
+        btn: "PRODUCTS"
     },
     {
         id: 3,
@@ -21,6 +23,7 @@ export const sliderItems =
         title:"DESIGN",
         desc: "Whenever you want!",
         bg: "85D887",
+        btn: "DESIGN IDEAS"
     },
 ]
 export const categories = 

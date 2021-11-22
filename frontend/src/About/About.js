@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class About extends Component {
     render() {
         return (
-            <div style={{ display: 'flex', justifyContent: 'left', padding: 50 }}>
+            <div style={{ display: 'flex', justifyContent: 'left', padding: 50, margin: 50 }}>
                 <div style={{ display: 'flex', justifyContent: 'left', padding: 50 }}>
                     <div>
                         <h1 style={{color: "green"}}>About Us</h1>

@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import background from '../assets/soft.jpg';
+import swal from "sweetalert";
 
 class SignUpForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       email: "",
@@ -17,12 +20,8 @@ class SignUpForm extends Component {
   }
 
   handleChange(event) {
-    let target = event.target;
-    let value = target.type === "checkbox" ? target.checked : target.value;
-    let name = target.name;
-
     this.setState({
-      [name]: value
+      [event.target.name]: event.target.value
     });
   }
 
@@ -31,17 +30,56 @@ class SignUpForm extends Component {
 
     console.log("The form was submitted with the following data:");
     console.log(this.state);
+
+    if(this.state.hasAgreed) {
+    axios
+      .post('http://localhost:3003/add_user',
+        {
+          "username": this.state.name,
+          "name": this.state.name,
+          "email": this.state.email,
+          "password": this.state.password,
+        })
+        .then(response => {
+          console.log("in response");
+          console.log(response);
+          /*
+          if (response) { // backend den gelen mesaji kontrol et
+            this.props.handleSuccess
+          }
+          */
+          this.props.history.push("/Login");
+        }
+        )
+        .catch(function (error) {
+          console.log("in error");
+          console.log(error.response.data);
+        });
+      }
+      else {
+        console.log("You did not agree to the terms!");
+        swal("Attention!", "You did not agree to the terms!", "error");
+        /*
+        const alert = alert.show('Some message', {
+          timeout: 2000, // custom timeout just for this one alert
+          type: 'success',
+         
+        });
+        */
+      }
   }
 
   render() {
     return (
-      <div className="formCenter" style={{ display: 'flex', justifyContent: 'center', padding: 100 }}>
-        <form onSubmit={this.handleSubmit} className="formFields">
+      <div className="formCenter" style={{ display: 'flex', justifyContent: 'center', padding: 70}}>
+        <div>
+          <h4 style={{ display: 'flex', justifyContent: 'center', padding: 20, color: "#83A092" }}>New user? Then Sign Up!</h4>
+        <form onSubmit={this.handleSubmit} className="formFields" style={{backgroundImage:`url(${background})`, padding: 80}}>
           <div className="formField" style={{ display: 'flex', justifyContent: 'left', padding: 20 }}>
-            <label className="formFieldLabel" htmlFor="name">
+            <label className="formFieldLabel" htmlFor="name" style={{opacity: 1}}>
               Full Name:
             </label>
-            <div style={{ margin: 10 }}> </div>
+            <div style={{ margin: 10  }}> </div>
             <input
               type="text"
               id="name"
@@ -107,6 +145,7 @@ class SignUpForm extends Component {
             </Link>
           </div>
         </form>
+        </div>
       </div>
     );
   }

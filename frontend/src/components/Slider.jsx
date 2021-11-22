@@ -101,7 +101,7 @@ export const Slider = () => {
                         <Title>{item.title}</Title>
                         <Desc>{item.desc}</Desc>
                         <form action="/Products" method="get">
-                        <Button>Our Products</Button>
+                        <Button>{item.btn}</Button>
                         </form>
                     </InfoContainer>
                 </Slide>
