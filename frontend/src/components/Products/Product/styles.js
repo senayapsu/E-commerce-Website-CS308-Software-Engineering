@@ -11,7 +11,7 @@ root:
 media: 
 {
     height: 0,
-    paddingTop: '56.25%'
+    padding: 100,
 },
 cardActions: 
 {
@@ -22,7 +22,7 @@ cardActions:
 },
 cardContent: 
 {
-    display: 'flex',
+    
     justifyContent: 'space-between',
     borderRadius : 10,
     

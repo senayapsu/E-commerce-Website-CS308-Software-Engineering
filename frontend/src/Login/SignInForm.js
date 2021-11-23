@@ -4,6 +4,7 @@ import Facebook from "./Facebook";
 import GoogleLoginComponent from "../googlebuttoncomponent";
 import axios from "axios";
 import background from '../assets/soft.jpg';
+import swal from "sweetalert";
 
 class SignInForm extends Component {
   constructor(props) {
@@ -16,6 +17,9 @@ class SignInForm extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.signOut = this.signOut.bind(this);
+    this.check = localStorage.getItem("isLoggedIn");
+
   }
   
 
@@ -31,24 +35,36 @@ class SignInForm extends Component {
     console.log("The form was submitted with the following data:");
     console.log(this.state);
     axios
-      .post('http://localhost:3003/add_user',
-        {
-          "username": "as",
-          "profile_image": "asef.jpeg",
-          "name": "des",
-          "email": this.state.email,
-          "password": this.state.password,
-          "isAdmin": false
-        })
+      .get('http://localhost:3003/users')
         .then(response => {
           console.log("in response");
           console.log(response);
-          /*
-          if (response) { // backend den gelen mesaji kontrol et
-            this.props.handleSuccess
+          var loggedUser;
+          if (response.status == 200) {
+            var isSuccess = false;
+            response.data.forEach(user => {
+              if ((user.email == this.state.email) && (user.password == this.state.password)) {
+                isSuccess = true;
+                loggedUser = JSON.stringify(user);
+                console.log(loggedUser);
+              }
+            });
+            if (!isSuccess) {
+              console.log("Nope!");
+              swal("Error!", "Wrong password or Email!!! Be careful you idiot", "error");
+            }
+            else
+            {
+              console.log("Yeeeeey successful login!!!!!");
+              localStorage.setItem("user", loggedUser);
+              localStorage.setItem("isLoggedIn", true); // user is logged in
+              this.props.history.push("/");
+              swal("Yeeey!", "You are logged in!!!!", "success")
+                .then(() => {
+                  window.location.reload();
+                });
+            }
           }
-          */
-          this.props.history.push("/");
         }
         )
         .catch(function (error) {
@@ -56,17 +72,40 @@ class SignInForm extends Component {
           console.log(error.response.data);
         });
   }
+
+  signOut()
+  {
+    localStorage.clear();
+    localStorage.setItem("isLoggedIn", false);
+    this.props.history.push("/");
+    swal("Log Out!", "You are logged out!!!!", "success")
+      .then(() => {
+      window.location.reload();
+    });
+
+  }
  
-  signIn() {
-      
-    }
   render() {
+    console.log(this.check);
+  if (this.check == "true") 
+  {
+      return(
+        <div style={{ display: 'flex', justifyContent: 'center', padding: 70, margin: 100, color: "#83A092", backgroundImage:`url(${background})` }}>
+           <div style={{  justifyContent: 'center', color: "#83A092" }}>
+              <h1>You have already logged in!</h1>
+              
+              <button className="formFieldButton" type="submit" onClick={this.signOut}>Sign Out</button>
+          </div>
+        </div>
+      )
+  }
+  else
+  {
     return (
-      
       <div className="formCenter" style={{ display: 'flex', justifyContent: 'center', padding: 70 }}>
         <div>
           <h1 style={{ display: 'flex', justifyContent: 'center', padding: 20, color: "#83A092" }}>Welcome to LAPPS</h1>
-       
+      
         <form className="formFields" onSubmit={this.handleSubmit} style={{backgroundImage:`url(${background})`, padding: 80}}>
           <div className="formField" style={{ display: 'flex', justifyContent: 'left', padding: 20 }}>
             <label className="formFieldLabel" htmlFor="email">
@@ -109,7 +148,7 @@ class SignInForm extends Component {
             <Link to="/SignUp" className="formFieldLink">
               Create an account
             </Link>
-       
+      
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'center', padding: 20 }}>
@@ -125,6 +164,7 @@ class SignInForm extends Component {
           
       
     );
+  }
   }
 }
 export default SignInForm;

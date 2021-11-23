@@ -18,11 +18,11 @@ const Product = ({product}) => {
                     <Typography variant = 'h5' gutterBottom>
                         {product.name}
                     </Typography>
-                    <Typography variant = 'h5'>
-                        {product.price}
+                    <Typography variant = 'h6'>
+                        ${product.price}
                     </Typography>
                     <Typography variant = 'body2' color = 'textSecondary'>
-                        {product.description}
+                        {product.category}
                     </Typography>
                 </div>
             </CardContent>
