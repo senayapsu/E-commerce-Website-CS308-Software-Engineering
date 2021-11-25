@@ -71,5 +71,28 @@ app.get("/users", async (request, response) => {
       response.status(500).send(error);
     }
   });
+  //localhost:3003/search?category=All
+  //search for products
+  app.get('/search', async(req,res) => {
+    const query={};
+    if(req.query.search){
+      query.name= {
+        $regex: req.query.search,
+        $options: 'i'
+      }
+      //assign category
+      if(req.query.category && req.query.category != 'All'){
+        query.category=req.query.category;
+      }
+    }
+  
+    try{
+      let products=await Product.find(query);
+      res.json(products)
+    }catch(error){
+      console.log(error);
+      res.status(500).send('Error to get products');
+    }
+  });
 
   module.exports = app;
