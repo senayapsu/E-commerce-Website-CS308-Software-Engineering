@@ -11,3 +11,5 @@ const DesignSchema = new mongoose.Schema({
 const Design = mongoose.model("Design", DesignSchema);
 
 module.exports = Design;
+
+//Latest Changes for cart and like pages
