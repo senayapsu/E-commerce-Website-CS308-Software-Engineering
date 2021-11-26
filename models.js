@@ -15,3 +15,5 @@ const UserSchema = new mongoose.Schema({
 const User = mongoose.model("User", UserSchema);
 
 module.exports = User;
+
+//Latest Changes for cart and like pages
