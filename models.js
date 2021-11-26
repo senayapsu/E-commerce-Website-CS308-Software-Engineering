@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema({
   password: {type: String, required: false},
   isAdmin: {type: Boolean, default: false, required: false},
   cartlist: {type: Array, required: false},
+  likes: {type: Array, required: false},
 });
 
 const User = mongoose.model("User", UserSchema);

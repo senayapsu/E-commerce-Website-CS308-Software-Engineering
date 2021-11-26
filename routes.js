@@ -4,7 +4,7 @@ const ProductModel = require("./product.js");
 const Product = require("./product.js");
 const app = express();
 const DesignModel= require ("./design_ideas");
-import axios from "axios";
+//import axios from "axios";
     
 
 app.post("/add_user", async (request, response) => {
@@ -51,10 +51,10 @@ app.get("/users", async (request, response) => {
   });
 
   app.post("/add_product_to_cart", async (request, response) => {
-  
+    products= await ProductModel.findOne({name:request.body.name})
     users=await userModel.findOneAndUpdate({username:"mystring123",},{
       $addToSet:{
-        cartlist: new ProductModel(request.body)}
+        cartlist: new ProductModel(products)}
     }
       );
     try {
@@ -66,7 +66,7 @@ app.get("/users", async (request, response) => {
   });
 
   app.get("/cart", async (request, response) => {
-    const users = await userModel.findOne({username: "mystring123"});
+    const users = await userModel.findOne({email:request.body.email});
   
     try {
       response.send(users.cartlist);
@@ -96,5 +96,29 @@ app.get("/users", async (request, response) => {
     }
 });
 
+app.post("/add_liked_product", async (request, response) => {
+  products= await ProductModel.findOne({name:request.body.name})
+  users=await userModel.findOneAndUpdate({email:request.body.email,},{
+      //$push:{likes: {"product_id": request.body.productid} }
+      $addToSet:{
+        likes: new ProductModel(products)
+      },
+  });
+  try {
+    await users.save();
+    response.send(users);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
 
+app.get("/likes", async (request, response) => {
+  const users = await userModel.findOne({email:request.body.email,});
+
+  try {
+    response.send(users.likes);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
   module.exports = app;
