@@ -122,3 +122,5 @@ app.get("/likes", async (request, response) => {
   }
 });
   module.exports = app;
+
+//Latest Changes for cart and like pages
