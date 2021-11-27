@@ -32,6 +32,7 @@ class SignUpForm extends Component {
     console.log(this.state);
 
     if(this.state.hasAgreed) {
+      
     axios
       .post('http://localhost:3003/add_user',
         {

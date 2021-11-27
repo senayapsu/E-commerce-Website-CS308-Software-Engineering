@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Card, ListGroup } from 'react-bootstrap';
-import ListProducts from '../components/Products/Products';
+import ListProducts from '../components/Products/Products3';
 
-class Products extends Component {
+class Products3 extends Component {
     render() {
         return (
             <div style={{justifyContent: 'center', padding: 100 }}>
@@ -17,4 +17,4 @@ class Products extends Component {
     }
 }
 
-export default Products;
+export default Products3;

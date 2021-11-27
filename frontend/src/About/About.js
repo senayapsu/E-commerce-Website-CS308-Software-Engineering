@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
+import background from '../assets/aaa.jpg';
 
 class About extends Component {
     render() {
         return (
-            <div style={{ display: 'flex', justifyContent: 'left', padding: 50, margin: 50 }}>
+            <div style={{ display: 'flex', justifyContent: 'left', padding: 50, margin: 30, backgroundImage:`url(${background})` }}>
                 <div style={{ display: 'flex', justifyContent: 'left', padding: 50 }}>
                     <div>
-                        <h1 style={{color: "green"}}>About Us</h1>
+                        <h1 style={{color: "#A6D4BD"}}>About Us</h1>
                 
                         
-                        <div style={{justifyContent: 'left', padding: 50 }}>
-                            <h4 style={{color: "grey"}}>
+                        <div style={{justifyContent: 'left', padding: 40 }}>
+                            <h4 style={{color: "white"}}>
                                 LAPSS is an e-commerce site that sells necessary products to bring landscape design ideas to life. The reason why this project is interesting is that such a platform does not have a strong competitor. At the same time, by giving design ideas, 
                                 it is possible for customers to shop consciously. The motivation of the project is that it is thought to be successful due to the lack of a strong competitor in the field of landscaping and it will encourage the customer to shop with joy. 
                                 The purpose of this project is to meet people's needs by offering different and attractive design opportunities by commercing various products. This web app offers the products in the landscape area in one place, providing the user with ease of 
