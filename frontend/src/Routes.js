@@ -10,6 +10,7 @@ import history from './history';
 import SignUpForm from "./Login/SignUpForm";
 import Cart from "./CartPage/CartPage";
 import Like from "./LikePage/Likes";
+import Payment from "./Payment/PaymentPage.js";
 
 export default class Routes extends Component {
     render() {
@@ -24,6 +25,7 @@ export default class Routes extends Component {
                     <Route path="/SignUp" component={SignUpForm} />
                     <Route path="/CartPage" component={Cart} />
                     <Route path="/LikePage" component={Like} />
+                    <Route path="/Payment" component={Payment} />
                 </Switch>
             </Router>
         )

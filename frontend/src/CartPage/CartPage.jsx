@@ -122,13 +122,18 @@ const SummaryButton = styled.button`
     color: white;
     font-weight: 600;
 `;
+
+
+
 const CartPage = () => {
     return (
         <Container>
             <Wrapper>
                 <Title>YOUR BAG</Title>
                 <Top>
-                    <TopButton>CONTINUE SHOPPING</TopButton>
+                    <form action="/Products" method="get">
+                      <TopButton>CONTINUE SHOPPING</TopButton>
+                    </form>
                     
                     <TopTexts>
                         <TopText>Shopping Bag</TopText>
@@ -194,7 +199,10 @@ const CartPage = () => {
                         <SummaryItemText>Estimated Shipping</SummaryItemText>
                         <SummaryItemPrice>$5</SummaryItemPrice>
                     </SummaryItem>
-                    <SummaryButton>BUY</SummaryButton>
+                    <form action="/Payment" method="get">
+                        <SummaryButton>BUY</SummaryButton>
+                    </form>
+                    
                     </Summary>
                 </Bottom>
             </Wrapper>
