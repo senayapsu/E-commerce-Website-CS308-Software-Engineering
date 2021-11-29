@@ -9,6 +9,7 @@ import Home from "./Home/Home";
 import history from './history';
 import SignUpForm from "./Login/SignUpForm";
 import Cart from "./CartPage/CartPage";
+import PaymentPage from "./PaymentPage/PaymentPage";
 import Like from "./LikePage/Likes";
 import Products1 from "./Product/Products1";
 import Products2 from "./Product/Products2";
@@ -29,6 +30,7 @@ export default class Routes extends Component {
                     <Route path="/Products1" component={Products1} />
                     <Route path="/Products2" component={Products2} />
                     <Route path="/Products3" component={Products3} />
+                    <Route path="/Payment" component={PaymentPage} />
                 </Switch>
             </Router>
         )

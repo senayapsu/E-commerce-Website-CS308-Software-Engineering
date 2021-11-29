@@ -40,7 +40,7 @@ const Center = styled.div`
     flex: 1;
     padding: 20px;
     display: flex;
-    align-items: right;
+    align-items: left;
     
 `;
 const Right = styled.div`
@@ -56,9 +56,15 @@ const Title = styled.h3`
     
 `;
 const Title2 = styled.h6`
-    
-    
+color: black;
+
 `;
+const Title3 = styled.h5`
+
+color: grey;
+
+`;
+
 
 const ContactItem = styled.div`
     margin-bottom: 20px;
@@ -87,20 +93,27 @@ const  Footer = () => {
                 
             </Left>
             
-                <Center>
-                <Title2>Copyright © 2021</Title2>
-                </Center>
+            <Center>
+                <Title>
+                    About
+                    <Title3>LAPSS is an E-commerce site that sells necessary products to bring landscape design ideas to life.
+                    
+                    </Title3>
+                    <Title2>Copyright © 2021</Title2>
+                </Title>
+            
+            </Center>
             
             <Right>
                 <Title>Contact Us</Title>
                 <ContactItem> <HomeIcon/>
-                    Address: .......
+                    Address: Istanbul/Turkey
                 </ContactItem>
                 <ContactItem> <PhoneIcon/>
-                    +906687.....
+                    +9066878888
                 </ContactItem>
                 <ContactItem> <MailIcon/>
-                    duygutumer@sabanciuniv.edu
+                    lapss@sabanciuniv.edu
                 </ContactItem>
                 
             </Right>

@@ -134,7 +134,7 @@ const Search  = (props) =>
       <div style={{ display: 'flex', justifyContent: 'center', padding: 30}}>
           <h1> Search Page </h1>
           </div>
-          <form style={{ display: 'flex', justifyContent: 'center', padding: 10 }}>
+          <form style={{ display: 'flex', justifyContent: 'center', padding: 10 , margin: 10}}>
               <label htmlFor="header-search"> 
               </label>
               <input
@@ -155,7 +155,7 @@ const Search  = (props) =>
       <div style={{ display: 'flex', justifyContent: 'center', padding: 30}}>
           <h1> Search Page </h1>
           </div>
-          <form style={{ display: 'flex', justifyContent: 'center', padding: 10 }}>
+          <form style={{ display: 'flex', justifyContent: 'center', padding: 10, margin:10 }}>
               <label htmlFor="header-search"> 
               </label>
               <input

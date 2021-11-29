@@ -7,7 +7,7 @@ class Products1 extends Component {
         return (
             <div style={{justifyContent: 'center', padding: 100 }}>
                 <div>
-                    <h2 style={{color: "black"}}>Our Products</h2>
+                    <h2 style={{color: "black"}}>FLOWERS</h2>
                     <ListProducts/>
                 </div>
                 
