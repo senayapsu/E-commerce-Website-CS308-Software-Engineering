@@ -1,29 +1,20 @@
 import React from 'react';
-import { useState } from "react";
-import { Navbar, Products} from './components';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// Screens
-import AboutUsScreen from "./Screens/AboutUsScreen";
-//import ProductScreen from "./screens/ProductScreen";
-//import CartScreen from "./screens/CartScreen";
-// between switch  <Route exact path="/" component={HomeScreen} />
+import './App.css';
+import Navigation from './components/Navbar';
+import Routes from './Routes';
 
 function App() {
-    const [sideToggle, setSideToggle] = useState(false);
-    
-    return (
-        <Router>
-            
-            <div >
-                
-                <Navbar click={() => setSideToggle(true)} />
-                <Products/>
-                
-                 <AboutUsScreen/>
-            </div>
-            
-        </Router>
-    )
+  return (
+    <div className="App" 
+    style={{
+      backgroundColor: 'white',
+     
+    }}
+    >
+      <Navigation />
+      <Routes />
+    </div>
+  );
 }
 
 export default App;

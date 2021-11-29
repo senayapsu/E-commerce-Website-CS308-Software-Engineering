@@ -49,6 +49,7 @@ export default makeStyles((theme) => ({
   },
   growth: {
     flexGrow: 0.02,
+    
   },
   navbarLinks: {
     display: 'flex',

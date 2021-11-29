@@ -1,11 +1,12 @@
 import React from 'react';
+import Product from '../Products/Product/Product';
 import { AppBar, Toolbar, IconButton, Badge, Typography } from '@material-ui/core';
 import { NavLink } from "react-router-dom";
 import {ShoppingCart} from '@material-ui/icons';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 //import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonIcon from '@mui/icons-material/Person';
-//import { Link, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 
 import logo from '../../assets/logo2.jpeg';
 import useStyles from './styles';
@@ -13,8 +14,10 @@ import useStyles from './styles';
 const Navbar = () => {
 
   const classes = useStyles();
+
   return (
-    <>
+    <Router>
+
       <AppBar position="fixed" className={classes.appBar} color="inherit">
 
         <Toolbar>
@@ -34,7 +37,7 @@ const Navbar = () => {
           <div className={classes.grow} />
 
           <div className={classes.button}>
-            <NavLink to = '/' >
+            <NavLink to = '/Search' >
             <Typography variant="h6" className={classes.text} color="white">Search</Typography>
             </NavLink>
           </div>
@@ -42,15 +45,15 @@ const Navbar = () => {
           <div className={classes.grow} />
 
           <div className={classes.button}>
-            <NavLink to = '/' >
+            <Link to = '/Design' >
             <Typography variant="h6" className={classes.text} color="white">Design Ideas</Typography>
-            </NavLink>
+            </Link>
           </div>
 
           <div className={classes.grow} />
 
           <div className={classes.button}>
-            <NavLink to = '/' >
+            <NavLink to = '/Product' >
             <Typography variant="h6" className={classes.text} color="white">All Products</Typography>
             </NavLink>
           </div>
@@ -58,9 +61,9 @@ const Navbar = () => {
           <div className={classes.grow} />
 
           <div className={classes.button}>
-            <NavLink to = '/' >
+            <Link to = '/AboutUsScreen' >
             <Typography variant="h6" className={classes.text} color="white">About us</Typography>
-            </NavLink>
+            </Link>
           </div>
 
           <div className={classes.grow} />
@@ -76,9 +79,13 @@ const Navbar = () => {
           <div className={classes.growth} />
 
           <div className={classes.button}>
+          
             <IconButton  aria-label="Show cart items" color="inherit">
+            <Link to = '/CartPage' >
                 <FavoriteIcon  style={{ color: "white" }}/>
+                </Link>
             </IconButton>
+            
           </div>
 
           <div className={classes.growth} />
@@ -94,7 +101,7 @@ const Navbar = () => {
         </Toolbar>
       </AppBar>
  
-    </>
+    </Router>
   );
 };
 
