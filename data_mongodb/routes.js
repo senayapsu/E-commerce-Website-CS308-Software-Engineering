@@ -1,6 +1,7 @@
 const express = require("express");
 const userModel = require("./models");
 const ProductModel = require("./product.js");
+const Product = require("./product.js");
 const app = express();
 
 app.post("/add_user", async (request, response) => {
@@ -47,10 +48,10 @@ app.get("/users", async (request, response) => {
   });
 
   app.post("/add_product_to_cart", async (request, response) => {
-    products= await ProductModel.findOne({name:request.body.name})
+  
     users=await userModel.findOneAndUpdate({username:"mystring123",},{
       $addToSet:{
-        cartlist: new ProductModel(products)}
+        cartlist: new ProductModel(request.body)}
     }
       );
     try {
@@ -62,7 +63,7 @@ app.get("/users", async (request, response) => {
   });
 
   app.get("/cart", async (request, response) => {
-    const users = await userModel.findOne({email:request.body.email});
+    const users = await userModel.findOne({username: "mystring123"});
   
     try {
       response.send(users.cartlist);
@@ -70,52 +71,5 @@ app.get("/users", async (request, response) => {
       response.status(500).send(error);
     }
   });
-  
-  app.get('/search', async(req,res) => {
-    const query={};
-    if(req.query.search){
-      query.name= {
-        $regex: req.query.search,
-        $options: 'i'
-      }
-    }
-      //assign category
-      if(req.query.category && req.query.category != 'All'){
-        query.category=req.query.category;
-      }
-  
-    try{
-      let products=await ProductModel.find(query);
-      console.log(products);
-      res.send(products);
-      
-    }catch(error){
-      console.log(error);
-      res.status(500).send('Error to get products');
-    }
-  });
-  
-  app.get("/design_ideas", async (request, response) => {
-    const users = await DesignModel.find({});
-  
-    try {
-      response.send(users);
-    } catch (error) {
-      response.status(500).send(error);
-    }
-  });
-
-  app.post("/add_design_idea", async (request, response) => {
-    const user = new DesignModel(request.body);
-  
-    try {
-      await user.save();
-      response.send(user);
-    } catch (error) {
-      response.status(500).send(error);
-    }
-});
-
 
   module.exports = app;
-
