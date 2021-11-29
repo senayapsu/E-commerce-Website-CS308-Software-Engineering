@@ -5,6 +5,8 @@ const Product = require("./product.js");
 const app = express();
 const DesignModel= require ("./design_ideas");
 //import axios from "axios";
+
+//ready for many post and gets
     
 
 app.post("/add_user", async (request, response) => {
