@@ -11,3 +11,4 @@ const ProductSchema = new mongoose.Schema({
 const Product = mongoose.model("Product", ProductSchema);
 
 module.exports = Product;
+//ready for many post and gets

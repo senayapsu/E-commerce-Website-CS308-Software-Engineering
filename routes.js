@@ -4,7 +4,10 @@ const ProductModel = require("./product.js");
 const Product = require("./product.js");
 const app = express();
 const DesignModel= require ("./design_ideas");
+const Design = require("./design_ideas");
 //import axios from "axios";
+
+//ready for many post and gets
     
 
 app.post("/add_user", async (request, response) => {
@@ -95,6 +98,37 @@ app.get("/users", async (request, response) => {
       response.status(500).send(error);
     }
 });
+app.post("/add_1_like_design", async (request, response) => {
+  users=await DesignModel.findOneAndUpdate({Title:request.body.Title,},{
+      //$push:{likes: {"product_id": request.body.productid} }
+      $inc:
+      {
+        like_number: 1
+      },
+  });
+  try {
+    await users.save();
+    response.send(users);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
+
+app.post("/dec_1_like_design", async (request, response) => {
+  users=await DesignModel.findOneAndUpdate({Title:request.body.Title,},{
+      //$push:{likes: {"product_id": request.body.productid} }
+      $inc:
+      {
+        like_number: -1
+      },
+  });
+  try {
+    await users.save();
+    response.send(users);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
 
 app.post("/add_liked_product", async (request, response) => {
   products= await ProductModel.findOne({name:request.body.name})
@@ -111,6 +145,7 @@ app.post("/add_liked_product", async (request, response) => {
     response.status(500).send(error);
   }
 });
+
 
 app.get("/likes", async (request, response) => {
   const users = await userModel.findOne({email:request.body.email,});
