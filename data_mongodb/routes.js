@@ -96,6 +96,29 @@ app.get("/users", async (request, response) => {
     }
   });
   
+  //http://localhost:3003/get_single_product?product_id=... 
+  app.get('/get_single_product', async(req,res) => {
+    const query={};
+    if(req.query.product_id){
+      query.name= {
+        $regex: req.query.product_id,
+        $options: 'i'
+      }
+    }
+    
+  
+    try{
+      product= await ProductModel.find(query);
+      console.log(product);
+      res.send(product);
+      
+    }catch(error){
+      console.log(error);
+      res.status(500).send('Error to get single product');
+    }
+
+  });
+  
   app.get("/design_ideas", async (request, response) => {
     const users = await DesignModel.find({});
   
