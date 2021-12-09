@@ -2,6 +2,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 const Router = require("./routes")
 var cors = require('cors');
+/*
+var session = require('express-session')
+var nodemailer = require('nodemailer');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var bcrypt = require('bcrypt-nodejs');
+var async = require('async');
+var crypto = require('crypto');
+*/
+
 
 const app = express();
 
@@ -23,5 +33,11 @@ db.once("open", function () {
 app.use(Router);
 
 app.listen(3003, () => {
-  console.log("Server is running at port 3000");
+  console.log("Server is running at port 3003");
 });
+
+
+
+
+
+

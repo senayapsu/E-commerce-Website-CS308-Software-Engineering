@@ -61,7 +61,7 @@ const Wrapper =  styled.div`
     transform: translateX(${(props)=> props.slideIndex *-100}vw);
 `;
 const Title =  styled.h1`
-    font-size: 70px;
+    font-size: 50px;
 `;
 const Desc =  styled.p`
     margin: 50px 0px;
@@ -101,7 +101,7 @@ export const Slider = () => {
                     <InfoContainer>
                         <Title>{item.title}</Title>
                         <Desc>{item.desc}</Desc>
-                        <form action="/Products" method="get">
+                        <form action={item.act} method="get">
                         <Button>{item.btn}</Button>
                         </form>
                     </InfoContainer>

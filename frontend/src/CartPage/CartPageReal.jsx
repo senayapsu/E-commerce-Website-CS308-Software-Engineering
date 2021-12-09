@@ -2,8 +2,8 @@ import { grey } from '@mui/material/colors';
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 import background from '../assets/soft.jpg';
-import ListProducts from '../components/Likes/Likes';
-class Likes extends Component {
+import ListProducts from './CartPage';
+class CartPageReal extends Component {
     constructor() {
         super();
         this.check = localStorage.getItem("isLoggedIn");
@@ -23,7 +23,7 @@ class Likes extends Component {
         //console.log(this.check);
         if (this.check == "true") {
             return(
-                <div style={{justifyContent: 'center', padding: 100, color: "#204C36", backgroundImage:`url(${background})` }}>
+                <div style={{justifyContent: 'center', padding: 100, color: "#204C36", backgroundColor: 'white',}}>
                    <div style={{justifyContent: 'center', color: "#204C36" }}>
                       <h1>WELCOME {this.user.name}!</h1>
                       <h3 style={{color: "#83A092"}}>Your Liked Products:</h3>
@@ -48,4 +48,4 @@ class Likes extends Component {
         }
     }
 }
-export default Likes;
+export default CartPageReal;

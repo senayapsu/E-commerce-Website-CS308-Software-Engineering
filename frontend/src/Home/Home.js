@@ -4,6 +4,7 @@ import history from './../history';
 import "./Home.css";
 import logo from "../assets/logo1.jpeg";
 import Slider from "../components/Slider";
+import Footer from "../components/Footer";
 
 export default class Home extends Component {
   constructor() {
@@ -20,11 +21,16 @@ export default class Home extends Component {
 
   render() {
     return (
+    <div>
       <div className="Home" style={{backgroundColor: "#E6F4E6", display: "flex"}}>
-      
+        
           <Slider/>
-       
+        
       </div>
+      <div>
+      <Footer/>
+    </div>
+    </div>
     );
   }
 }

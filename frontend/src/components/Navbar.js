@@ -28,10 +28,11 @@ const Navigation = (props) => {
                     <Nav.Link href="/About">    About Us    </Nav.Link>
                     <Nav.Link href="/Search">   Search      </Nav.Link>
                     <Nav.Link href="/Products"> Products    </Nav.Link>
-                    <Nav.Link href="/">         Design Ideas</Nav.Link>
+                    <Nav.Link href="/DesignIdeas">Design Ideas</Nav.Link>
                     <Nav.Link href="/Login">    Login       </Nav.Link>
                     <Nav.Link href="/LikePage"> Likes       </Nav.Link>
                     <Nav.Link href="/CartPage"> Cart        </Nav.Link>
+                    
                 </Nav>
             </Navbar.Collapse>
            

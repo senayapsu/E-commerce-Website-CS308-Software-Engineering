@@ -7,19 +7,16 @@ import axios from "axios";
 import useStyles from './styles';
 import swal from "sweetalert";
 
-
 var user = JSON.parse(localStorage.getItem("user"));
 var product_name = "";
 var bilmemne = false;
 
 const addLikes = async (what) => {
-    console.log(user);
     if (user == null) {
-        swal("Error!", "You must login first!", "error");
+        swal("Error!", "Wrong password or Email!", "error");
         console.log("you are not logged in");
         return;
     }
-    swal("<3", "You liked the item!", "success");
     var res = await axios.post('http://localhost:3003/add_liked_product', {
         "name": what,
         "email": user.email,
@@ -28,23 +25,7 @@ const addLikes = async (what) => {
     return res.data;
   };
 
-  const addCart = async (what) => {
-    console.log(user);
-    if (user == null) {
-        swal("Error!", "You must login first!", "error");
-        console.log("you are not logged in");
-        return;
-    }
-    swal("+1", "The item is added to your cart!", "success");
-    var res = await axios.post('http://localhost:3003/add_product_to_cart', {
-        "name": what,
-        "email": user.email,
-    })
-    console.log(res);
-    return res.data;
-  };
-
-const Product = ({product}) => {
+const Like = ({product}) => {
 
     const [apiResponse, setApiResponse] = useState([]);
     const [dummy, setDummy] = useState(1);
@@ -53,9 +34,8 @@ const Product = ({product}) => {
     useEffect(() => {
       console.log("useEffect");
       if (bilmemne){
-      addLikes(product_name);
-      addCart(product_name); 
-       
+      addLikes(product_name).then(
+        swal("<3", "You liked the item!", "success"));
       }
     }, [dummy])
 
@@ -76,7 +56,7 @@ const Product = ({product}) => {
                 </div>
             </CardContent>
             <CardActions disableSpacing className = {classes.cardActions}>
-                <IconButton aria-label = "Add to Cart" onClick={() => {bilmemne=true; product_name=product.name; setDummy(dummy+1)}}>
+                <IconButton aria-label = "Add to Cart">
                     <AddShoppingCart/>
                     
                 </IconButton>
@@ -89,4 +69,4 @@ const Product = ({product}) => {
     )
 }
 
-export default Product
+export default Like

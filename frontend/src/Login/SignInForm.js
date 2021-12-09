@@ -18,6 +18,7 @@ class SignInForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.signOut = this.signOut.bind(this);
+    this.goSignUpPage = this.goSignUpPage.bind(this);
     this.check = localStorage.getItem("isLoggedIn");
 
   }
@@ -51,7 +52,7 @@ class SignInForm extends Component {
             });
             if (!isSuccess) {
               console.log("Nope!");
-              swal("Error!", "Wrong password or Email!!! Be careful you idiot", "error");
+              swal("Error!", "Wrong password or Email!", "error");
             }
             else
             {
@@ -84,17 +85,23 @@ class SignInForm extends Component {
     });
 
   }
+  goSignUpPage()
+  {
+    this.props.history.push("/SignUp");
+    window.location.reload();
+  }
  
   render() {
     console.log(this.check);
   if (this.check == "true") 
   {
       return(
-        <div style={{ display: 'flex', justifyContent: 'center', padding: 70, margin: 100, color: "#83A092", backgroundImage:`url(${background})` }}>
+        <div style={{ display: 'flex', justifyContent: 'center', padding: 200,  color: "#83A092", backgroundImage:`url(${background})` }}>
            <div style={{  justifyContent: 'center', color: "#83A092" }}>
               <h1>You have already logged in!</h1>
-              
-              <button className="formFieldButton" type="submit" onClick={this.signOut}>Sign Out</button>
+              <div style={{display: 'flex', justifyContent: 'center', margin: 30, padding: 30}}>
+              <button className="formFieldButton" type="submit" onClick={this.signOut} >Sign Out</button>
+              </div>
           </div>
         </div>
       )
@@ -143,12 +150,16 @@ class SignInForm extends Component {
           <div className="formField" style={{ margin: 20 }}>
           
             <button className="formFieldButton" type="submit">Sign In</button>{" "}
-
-            
-            <Link to="/SignUp" className="formFieldLink">
+            <Link to="/SignUp" className="formFieldLink" onClick = {this.goSignUpPage}>
               Create an account
             </Link>
-      
+
+            <div style={{display: 'flex', alignItems: "left", justifyContent: 'left', padding: 20 }}>
+            <Link to="/FYP" className="formFieldLink" onClick = {this.goSignUpPage}>
+              Forget your password?
+            </Link>
+              
+            </div>
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'center', padding: 20 }}>

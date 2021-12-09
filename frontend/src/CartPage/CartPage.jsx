@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { Button } from '@mui/material';
+import axios from "axios";
+
 const Container = styled.div`
     
 `;
@@ -122,13 +124,35 @@ const SummaryButton = styled.button`
     color: white;
     font-weight: 600;
 `;
+
+var user = JSON.parse(localStorage.getItem("user"));
+
+var totalPrice = 0;
+
+const getProducts = async () => {
+    const res = await axios.post("http://localhost:3003/cart", 
+    {
+        "email": user.email,
+    })
+    console.log(res.data);
+    return res.data;
+};
+
 const CartPage = () => {
+    const [apiResponse, setApiResponse] = useState([]);
+
+    useEffect(() => {
+      getProducts().then(
+        (res) => setApiResponse(res));
+    }, [])
     return (
         <Container>
             <Wrapper>
                 <Title>YOUR BAG</Title>
                 <Top>
-                    <TopButton>CONTINUE SHOPPING</TopButton>
+                    <form action="/Products" method="get">
+                      <TopButton>CONTINUE SHOPPING</TopButton>
+                    </form>
                     
                     <TopTexts>
                         <TopText>Shopping Bag</TopText>
@@ -138,51 +162,34 @@ const CartPage = () => {
                 </Top>
                 <Bottom>
                     <Info>
-                        <Product>
-                            <ProductDetail> 
-                                <Image src = "https://idsb.tmgrup.com.tr/ly/uploads/images/2021/02/12/92946.jpg"/>
-                                <Details>
-                                    <ProductName>
-                                        <b> Product: </b> Flowers
-                                    </ProductName>
-        
-                                    <ProductId>
-                                        <b> ID: </b> 12627
-                                    </ProductId>
-                                </Details>
-                            </ProductDetail> 
-                            <PriceDetail>
-                                <ProductAmountContainer>
-                                    <AddIcon/>
-                                    <ProductAmount>1</ProductAmount>
-                                    <RemoveIcon/>
-                                </ProductAmountContainer>
-                                <ProductPrice>$30</ProductPrice>
-                            </PriceDetail>
-                        </Product>
                         <Hr/>
+                {apiResponse.map((product)=>(
                         <Product>
                             <ProductDetail> 
-                                <Image src = "https://cdn.britannica.com/w:400,h:300,c:crop/36/82536-050-7E968918/Shasta-daisies.jpg"/>
+                                <Image src = {product.image}/>
                                 <Details>
                                     <ProductName>
-                                        <b> Product: </b> Flowers
+                                        <b> Product: </b> {product.name}
                                     </ProductName>
         
                                     <ProductId>
-                                        <b> ID: </b> 12627
+                                        <b> Category: </b> {product.category}
                                     </ProductId>
                                 </Details>
                             </ProductDetail> 
+
                             <PriceDetail>
                                 <ProductAmountContainer>
                                     <AddIcon/>
                                     <ProductAmount>1</ProductAmount>
                                     <RemoveIcon/>
                                 </ProductAmountContainer>
-                                <ProductPrice>$30</ProductPrice>
+                                <ProductPrice>${product.price}</ProductPrice>
                             </PriceDetail>
+                            
                         </Product>
+                        ))}
+                        <Hr/>
                     </Info>
                     <Summary>
                     <SummaryTitle>ORDER SUMMARY</SummaryTitle>
@@ -194,7 +201,9 @@ const CartPage = () => {
                         <SummaryItemText>Estimated Shipping</SummaryItemText>
                         <SummaryItemPrice>$5</SummaryItemPrice>
                     </SummaryItem>
-                    <SummaryButton>BUY</SummaryButton>
+                    <form action="/Payment" method="get">
+                        <SummaryButton>BUY</SummaryButton>
+                    </form>
                     </Summary>
                 </Bottom>
             </Wrapper>

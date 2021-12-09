@@ -31,7 +31,8 @@ class SignUpForm extends Component {
     console.log("The form was submitted with the following data:");
     console.log(this.state);
 
-    if(this.state.hasAgreed) {
+    if(this.state.hasAgreed && this.state.name !="" && this.state.email !="" && this.state.password !="") {
+      
     axios
       .post('http://localhost:3003/add_user',
         {
@@ -56,9 +57,10 @@ class SignUpForm extends Component {
           console.log(error.response.data);
         });
       }
-      else {
+      else if (this.state.name !="" || this.state.email !="" || this.state.password !="") 
+      {
         console.log("You did not agree to the terms!");
-        swal("Attention!", "You did not agree to the terms!", "error");
+        swal("Attention!", "You shouldn't left empty!", "error");
         /*
         const alert = alert.show('Some message', {
           timeout: 2000, // custom timeout just for this one alert
@@ -66,6 +68,10 @@ class SignUpForm extends Component {
          
         });
         */
+      }
+      else {
+        console.log("You did not agree to the terms!");
+        swal("Attention!", "You did not agree to the terms!", "error");
       }
   }
 
@@ -77,7 +83,7 @@ class SignUpForm extends Component {
         <form onSubmit={this.handleSubmit} className="formFields" style={{backgroundImage:`url(${background})`, padding: 80}}>
           <div className="formField" style={{ display: 'flex', justifyContent: 'left', padding: 20 }}>
             <label className="formFieldLabel" htmlFor="name" style={{opacity: 1}}>
-              Full Name:
+              Username:
             </label>
             <div style={{ margin: 10  }}> </div>
             <input
