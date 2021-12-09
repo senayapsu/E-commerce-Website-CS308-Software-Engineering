@@ -151,8 +151,8 @@ const getProduct = async (what) => {
   };
 
 const ProductDetailPage = (props) => {
-    const path_text=window.location.pathname[1,-1];
-    console.log(window.location.pathname[1,-1]);
+    const path_text=window.location.pathname.substring(1,);
+    console.log(window.location.pathname.substring(1,));
     const [apiResponse, setApiResponse] = useState([]);
     const [dummy, setDummy] = useState(1);
     //const productId= props.match.params.productId;
