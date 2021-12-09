@@ -142,11 +142,11 @@ const RightPanImage = styled.img`
     width: 170px;
     height: 85px;
 `;
-//http://localhost:3003/get_single_product?product_name=... 
+//http://localhost:3003/get_single_product?productId=... 
 
 
 const getProduct = async (what) => {
-    var res = await axios.get('http://localhost:3003/get_single_product?product_id='+what);
+    var res = await axios.get('http://localhost:3003/get_single_product?productId='+what);
     return res.data;
   };
 
