@@ -70,25 +70,24 @@ const Details = styled.div`
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-`;
-const ProductName = styled.span`
     
 `;
-const ProductId = styled.span`
+const ProductName = styled.h6`
     
 `;
-const ProductDescription = styled.span`
+const ProductId = styled.h6`
     
 `;
-const ProductCategory = styled.span`
+const ProductDescription = styled.h6`
+   
+`;
+const ProductCategory = styled.h6`
     
 `;
 const PriceDetail = styled.span`
-    flex: 1;
+    
     display: flex;
-    align-items: center; 
-    justify-content: center;
+    
     flex-direction: column;
 `;
 const ProductAmountContainer = styled.div`
@@ -116,7 +115,7 @@ const Summary = styled.div`
     padding: 20px;
     hight: 50vh;
 `;
-const SummaryTitle = styled.h1`
+const SummaryTitle = styled.h3`
     font-weight: 200;
 `;
 const SummaryItem = styled.div`
@@ -144,31 +143,46 @@ const RightPanImage = styled.img`
 `;
 //http://localhost:3003/get_single_product?productId=... 
 
-
+var  product_array=[];
 const getProduct = async (what) => {
     var res = await axios.get('http://localhost:3003/get_single_product?productId='+what);
-    return res.data;
+    product_array.push(res.data);
+    return product_array;
   };
 
+  
 const ProductDetailPage = (props) => {
     const path_text=window.location.pathname.substring(1,);
     console.log(window.location.pathname.substring(1,));
     const [apiResponse, setApiResponse] = useState([]);
-    const [dummy, setDummy] = useState(1);
-    //const productId= props.match.params.productId;
+   
+    const productId= props.match.params.productId;
 
     useEffect(() => {
         console.log("useEffect");
         getProduct(path_text).then(
           (res) => setApiResponse(res));
-      }, [dummy])
-  
-  
+      })
+    
+    var category_str="";
+    var product_category=""
+    apiResponse.map((product) => (
+        product_category=product.category
+      ))
+      if ("Furniture"==product_category) {
+        category_str="/Products3"
+      }else if("Garden"==product_category){
+          category_str="/Products2"
+      }else if("Flowers"==product_category){
+          category_str="/Products1"
+      }
+
+      
     return (
-        <Container>
-            {apiResponse.map((product) => (
-            <Wrapper>
-                <Title>Product Details</Title>
+        <Container >
+             {apiResponse.map((product) => (
+            <Wrapper >
+                <Title>{product.name}</Title>
                 <Top>
                     <form action="/Products" method="get">
                       <TopButton>Back to Products</TopButton>
@@ -179,66 +193,63 @@ const ProductDetailPage = (props) => {
                     <Info>
                         <Product>
                             <ProductDetail> 
-                                <Image src = "https://cdn.pixabay.com/photo/2018/07/01/21/50/table-3510523__340.jpg"/>
+                                <Image src = {product.image}/>
                                 <Details>
                                     <ProductName>
                                         <b> Product: </b> {product.name}
                                     </ProductName>
-        
+                                    <br></br>
                                     <ProductId>
                                         <b> ID: </b> {product._id}
                                     </ProductId>
+                                    <br></br>
                                     <ProductCategory>
-                                        <b>Category:</b> Furniture
+                                        <b>Category:</b> {product.category}
                                     </ProductCategory>
+                                    <br></br>
                                     <ProductDescription>
-                                        <b>Description:</b> 6 Chairs and 1 table made of steel and original wood.
+                                        <b>Description:</b> {product.description}
                                     </ProductDescription>
                                 </Details>
                             </ProductDetail> 
                             <PriceDetail>
+                            <form action={category_str} method="get">
+                                <SummaryButton>See more {product_category}</SummaryButton>
+                            </form>
+                            <br></br>
                                 <ProductAmountContainer>
-                                    <IconButton aria-label = "Add to Cart">
-                                        <AddShoppingCart/>
-                                    </IconButton>
+                                <IconButton aria-label = "Add to Cart" onClick={() => {
+                                    var user = JSON.parse(localStorage.getItem("user"));
+
+                                    if (user == null) {
+                                        swal("Error!", "You must login first!", "error");
+                                        console.log("you are not logged in");
+                                        return;
+                                    }
+
+                                    swal("+1", "The item is added to your cart!", "success");
+                                    var res = axios.post('http://localhost:3003/add_product_to_cart', {
+                                        "name": product.name,
+                                        "email": user.email,
+                                    })
+                                    console.log(res);
+                                    return res.data;
+
+                                    }}>
+                                    <AddShoppingCart/> 
+                                </IconButton>
                                 </ProductAmountContainer>
-                                <ProductPrice>$30</ProductPrice>
+                                <ProductPrice>${product.price}</ProductPrice>
+                                
                             </PriceDetail>
+                           
                         </Product>
                         
                     </Info>
-                    <Summary>
-                    <SummaryTitle>Similar Products</SummaryTitle>
-                    <SummaryItem>
-                        <Info>
-                        <Product>
-                            <ProductDetail> 
-                                <RightPanImage src = "https://as1.ftcdn.net/v2/jpg/03/28/06/16/1000_F_328061651_MKKj6BM3mVlpIJHQ6b4gWdDXCO1Rawyn.jpg"/>
-                                <Details>
-                                    <ProductName>
-                                        <b> Product: </b> Wooden Bench
-                                    </ProductName>
-                                </Details>
-                            </ProductDetail> 
-                            <PriceDetail>
-                                <ProductAmountContainer>
-                                    <AddIcon/>
-                                    <ProductAmount>1</ProductAmount>
-                                    <RemoveIcon/>
-                                </ProductAmountContainer>
-                                <ProductPrice>$30</ProductPrice>
-                            </PriceDetail>
-                        </Product>
-                    </Info>
-                    </SummaryItem>
-                    <form action="/Products3" method="get">
-                        <SummaryButton>See Similar Products</SummaryButton>
-                    </form>
-                    
-                    </Summary>
+                                        
                 </Bottom>
             </Wrapper>
-            ))}
+             ))}
         </Container>
     )
 }
