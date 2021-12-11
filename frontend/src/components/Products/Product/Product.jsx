@@ -49,7 +49,7 @@ const Product = ({product}) => {
     const [apiResponse, setApiResponse] = useState([]);
     const [dummy, setDummy] = useState(1);
     const classes = useStyles();
-    
+    const productId=product._id;
     useEffect(() => {
       console.log("useEffect");
       if (bilmemne){
@@ -61,7 +61,7 @@ const Product = ({product}) => {
 
     return (
         <Card className = {classes.root} >
-            <CardMedia className = {classes.media} image = {product.image} title = {product.name}/>
+            <a href={'/'+ productId}><CardMedia className = {classes.media} image = {product.image} title = {product.name}/></a>
             <CardContent>
                 <div className = {classes.cardContent}>
                     <Typography variant = 'h5' gutterBottom>

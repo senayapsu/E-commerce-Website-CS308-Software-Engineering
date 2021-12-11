@@ -96,6 +96,26 @@ app.get("/users", async (request, response) => {
     }
   });
   
+  //http://localhost:3003/get_single_product?productId=... 
+  app.get('/get_single_product', async(req,res) => {
+    const query={};
+    if(req.query.productId){
+      query.name = req.query.productId
+    }
+    
+  
+    try{
+      product= await ProductModel.findOne({_id:query.name});
+      console.log(product);
+      res.send(product);
+      
+    }catch(error){
+      console.log(error);
+      res.status(500).send('Error to get single product');
+    }
+
+  });
+  
   app.get("/design_ideas", async (request, response) => {
     const users = await DesignModel.find({});
   
@@ -180,6 +200,38 @@ app.post("/change_password", async (request, response) => {
       //$push:{likes: {"product_id": request.body.productid} }
       $set:{
         password: request.body.password
+      },
+  });
+  try {
+    await users.save();
+    response.send(users);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
+
+app.post("/discard_likes_product", async (request, response) => {
+  products= await ProductModel.findOne({name:request.body.name})
+  users=await userModel.findOneAndUpdate({email:request.body.email,},{
+      //$push:{likes: {"product_id": request.body.productid} }
+       $pull:{
+        likes:({name:request.body.name})
+      },
+  });
+  try {
+    await users.save();
+    response.send(users);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
+
+app.post("/discard_cart_product", async (request, response) => {
+  products= await ProductModel.findOne({name:request.body.name})
+  users=await userModel.findOneAndUpdate({email:request.body.email,},{
+      //$push:{likes: {"product_id": request.body.productid} }
+       $pull:{
+        cartlist:({name:request.body.name})
       },
   });
   try {

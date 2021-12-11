@@ -1,0 +1,24 @@
+{
+  "name": "cs308team",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "react-scripts": "^4.0.3",
+    "sweetalert": "^2.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/senayapsu/cs308team.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/senayapsu/cs308team/issues"
+  },
+  "homepage": "https://github.com/senayapsu/cs308team#readme"
+}
