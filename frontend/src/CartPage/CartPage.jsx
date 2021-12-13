@@ -4,7 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { Button } from '@mui/material';
 import axios from "axios";
-
+import {IconButton} from '@material-ui/core';
 const Container = styled.div`
     
 `;
@@ -129,6 +129,25 @@ var user = JSON.parse(localStorage.getItem("user"));
 
 var totalPrice = 0;
 
+const discardCart = async (what) => {
+    
+    console.log(user);
+    if (user == null) {
+        swal("Error!", "You must login first!", "error");
+        console.log("you are not logged in");
+        return;
+    }
+    var res = await axios.post('http://localhost:3003/discard_cart_product', {
+        "name": what,
+        "email": user.email,
+    })
+    swal(":(", "Discarded!", "success").then(()=> {
+        window.location.reload();
+    });
+    console.log(res);
+    return res.data;
+    
+  };
 const getProducts = async () => {
     const res = await axios.post("http://localhost:3003/cart", 
     {
@@ -180,9 +199,10 @@ const CartPage = () => {
 
                             <PriceDetail>
                                 <ProductAmountContainer>
-                                    <AddIcon/>
+                                <IconButton><AddIcon/></IconButton>
+                                    
                                     <ProductAmount>1</ProductAmount>
-                                    <RemoveIcon/>
+                                    <IconButton><RemoveIcon onClick = {() => {discardCart(product.name)}}/></IconButton>
                                 </ProductAmountContainer>
                                 <ProductPrice>${product.price}</ProductPrice>
                             </PriceDetail>

@@ -28,7 +28,7 @@ axios.get("http://localhost:3003/products")
 });
 */
 //var products = [];
-
+var user = JSON.parse(localStorage.getItem("user"));
 const getProducts = async () => {
 
     const res = await axios.get("http://localhost:3003/products");
@@ -44,8 +44,36 @@ const Products = (props) => // Produtcs var. is a fuction which does not take a 
     const classes = useStyles();
     
     useEffect(() => {
-      getProducts().then(
-        (res) => setApiResponse(res));
+      axios
+        .get('http://localhost:3003/users')
+          .then(response => {
+            var loggedUser;
+            if (response.status == 200) {
+              var isSuccess = false;
+              response.data.forEach(user2 => {
+                if ((user2.email == user.email)) {
+                  isSuccess = true;
+                  user = user2;
+                  loggedUser = JSON.stringify(user2);
+                  console.log("Updated user!");
+                }
+              });
+              localStorage.setItem("user", loggedUser);
+            }
+          }).then(() => {
+            getProducts().then(
+              (res) => {
+                res.forEach((item) => {
+                  user.likes.forEach((liked) => {
+                    if (item.name == liked.name) {
+                      item.isLiked = true;
+                    }
+                  })
+                });
+                console.log("Got products!");
+                setApiResponse(res);
+            });
+          })
     }, [])
 
     return (

@@ -62,6 +62,22 @@ app.get("/users", async (request, response) => {
     }
   });
 
+  app.post("/discard_cart_product", async (request, response) => {
+    products= await ProductModel.findOne({name:request.body.name})
+    users=await userModel.findOneAndUpdate({email:request.body.email,},{
+        //$push:{likes: {"product_id": request.body.productid} }
+         $pull:{
+          cartlist:({name:request.body.name})
+        },
+    });
+    try {
+      await users.save();
+      response.send(users);
+    } catch (error) {
+      response.status(500).send(error);
+    }
+  });
+
   app.post("/cart", async (request, response) => {
     const users = await userModel.findOne({email:request.body.email});
   
@@ -132,6 +148,7 @@ app.post("/add_1_like_design", async (request, response) => {
   }
 });
 
+
 app.post("/dec_1_like_design", async (request, response) => {
   users=await DesignModel.findOneAndUpdate({Title:request.body.Title,},{
       //$push:{likes: {"product_id": request.body.productid} }
@@ -147,7 +164,6 @@ app.post("/dec_1_like_design", async (request, response) => {
     response.status(500).send(error);
   }
 });
-
 app.post("/add_liked_product", async (request, response) => {
   products= await ProductModel.findOne({name:request.body.name})
   users=await userModel.findOneAndUpdate({email:request.body.email,},{
@@ -163,7 +179,59 @@ app.post("/add_liked_product", async (request, response) => {
     response.status(500).send(error);
   }
 });
-
+app.post("/discard_likes_product", async (request, response) => {
+  products= await ProductModel.findOne({name:request.body.name})
+  users=await userModel.findOneAndUpdate({email:request.body.email,},{
+      //$push:{likes: {"product_id": request.body.productid} }
+       $pull:{
+        likes:({name:request.body.name})
+      },
+  });
+  try {
+    await users.save();
+    response.send(users);
+  } catch (error) {
+    response.status(500).send(error);
+  }
+});
+app.post("/everything_for_like", async (request, response)=> {
+  //products=1
+  products = await ProductModel.findOne({name: request.body.name})
+  //user = await userModel.likes.find({name: request.body.name})
+  //user = await userModel.find({likes:({name:request.body.name})})
+  //user2=2
+  //user2= await userModel.find({likes:{$elemMatch:{name:request.body.name}}})
+  //likes arrayine şu updatelerden ulas addtoset vs. sonra onu bi variable'a atayarak productla karsılastır if statement olarak
+  if((await userModel.findOne({email:request.body.email,likes:{$elemMatch:{name:request.body.name}}}))) //ya da if(user!=null)
+  {
+    users=await userModel.findOneAndUpdate({email:request.body.email,},{
+        //$push:{likes: {"product_id": request.body.productid} }
+         $pull:{
+          likes:({name:request.body.name})
+        },
+    });
+    try {
+      await users.save();
+      response.send(users);
+    } catch (error) {
+      response.status(500).send(error);
+    }
+  }
+  else{
+    users=await userModel.findOneAndUpdate({email:request.body.email,},{
+        //$push:{likes: {"product_id": request.body.productid} }
+        $addToSet:{
+          likes: new ProductModel(products)
+        },
+    });
+    try {
+      await users.save();
+      response.send(users);
+    } catch (error) {
+      response.status(500).send(error);
+    }
+  }
+});
 
 app.post("/likes", async (request, response) => {
   const users = await userModel.findOne({email:request.body.email,});
@@ -174,7 +242,22 @@ app.post("/likes", async (request, response) => {
     response.status(500).send(error);
   }
 });
+app.get('/get_single_product', async(req,res) => {
+  const query={};
+  if(req.query.productId){
+    query.name = req.query.productId
+  }
+  try{
+    product= await ProductModel.findOne({_id:query.name});
+    console.log(product);
+    res.send(product);
+    
+  }catch(error){
+    console.log(error);
+    res.status(500).send('Error to get single product');
+  }
 
+});
 app.post("/change_password", async (request, response) => {
   users=await userModel.findOneAndUpdate({email:request.body.email,},{
       //$push:{likes: {"product_id": request.body.productid} }

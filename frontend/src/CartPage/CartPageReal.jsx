@@ -23,10 +23,8 @@ class CartPageReal extends Component {
         //console.log(this.check);
         if (this.check == "true") {
             return(
-                <div style={{justifyContent: 'center', padding: 100, color: "#204C36", backgroundColor: 'white',}}>
+                <div style={{justifyContent: 'center', color: "#204C36", backgroundColor: 'white',}}>
                    <div style={{justifyContent: 'center', color: "#204C36" }}>
-                      <h1>WELCOME {this.user.name}!</h1>
-                      <h3 style={{color: "#83A092"}}>Your Liked Products:</h3>
                       <ListProducts/>
                     </div>
                   

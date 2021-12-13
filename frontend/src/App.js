@@ -7,8 +7,8 @@ function App() {
   return (
     <div className="App" 
     style={{
-      //backgroundColor: 'white',
-      backgroundImage:`url(${background})`,
+      backgroundColor: 'white',
+      //backgroundImage:`url(${background})`,
     }}
     >
       <Navigation />
