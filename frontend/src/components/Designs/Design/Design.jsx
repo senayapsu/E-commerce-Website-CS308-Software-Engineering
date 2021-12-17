@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import {Card, CardMedia, CardContent, CardActions, Typography, IconButton} from '@material-ui/core';
+import {Card, CardMedia, CardContent, CardActions, Typography, IconButton, Button} from '@material-ui/core';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
 import useStyles from './styles';
 import axios from "axios";
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import { blue } from '@material-ui/core/colors';
 var user = JSON.parse(localStorage.getItem("user"));
 var title = "";
 var bilmemne = false;
@@ -48,6 +49,22 @@ const like = async (what) => {
     return res.data;
     
   };
+  var goLink = (what) =>
+  {
+      if(what == "GARDEN")
+      {
+        return '/Products1';
+      }
+      else if(what == "FURNITURE")
+      {
+        return "/Products3";
+      }
+      else
+      {
+        return "/Products2";
+      }
+
+  };
 
 const Design = ({design}) => {
 
@@ -74,7 +91,6 @@ const Design = ({design}) => {
                     <Typography variant = 'h5' gutterBottom>
                         {design.Title}
                     </Typography>
-                    
                     <Typography variant = 'h6' color = 'textSecondary'>
                         Category: {design.category}
                     </Typography>
@@ -82,6 +98,14 @@ const Design = ({design}) => {
                         Description: {design.description}
                     </Typography>
                 </div>
+                <div>
+                <form action={goLink(design.category)} method="get">
+                    <Button variant="contained" type='submit'>
+                        Products of {design.category}
+                    </Button>
+                </form>
+                </div>
+                    
             </CardContent>
             <CardActions disableSpacing className = {classes.cardActions}>
                 <IconButton aria-label = "Like" onClick={() => {bilmemne=true; title = design.Title; setDummy(dummy+1); design.like_number+=1}}>

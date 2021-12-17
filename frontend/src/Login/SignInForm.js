@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Facebook from "./Facebook";
 import GoogleLoginComponent from "../googlebuttoncomponent";
 import axios from "axios";
@@ -85,14 +85,17 @@ class SignInForm extends Component {
     });
 
   }
-  goSignUpPage()
+  goSignUpPage(what)
   {
     this.props.history.push("/SignUp");
     window.location.reload();
   }
- 
+  goForgetPage()
+  {
+    this.props.history.push("/Forget");
+    window.location.reload();
+  }
   render() {
-    console.log(this.check);
   if (this.check == "true") 
   {
       return(
@@ -153,15 +156,14 @@ class SignInForm extends Component {
             <Link to="/SignUp" className="formFieldLink" onClick = {this.goSignUpPage}>
               Create an account
             </Link>
-
             <div style={{display: 'flex', alignItems: "left", justifyContent: 'left', padding: 20 }}>
-            <Link to="/FYP" className="formFieldLink" onClick = {this.goSignUpPage}>
+            <Link to="/Forget" className="formFieldLink">
               Forget your password?
             </Link>
-              
-            </div>
           </div>
 
+          </div>
+            
           <div style={{ display: 'flex', justifyContent: 'center', padding: 20 }}>
             <Facebook/>
           </div>

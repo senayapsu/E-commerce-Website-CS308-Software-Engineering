@@ -7,6 +7,7 @@ import swal from "sweetalert";
 class SignUpForm extends Component {
   constructor(props) {
     super(props);
+   
 
     this.state = {
       email: "",
@@ -17,7 +18,9 @@ class SignUpForm extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+     
   }
+
 
   handleChange(event) {
     this.setState({
@@ -49,30 +52,39 @@ class SignUpForm extends Component {
             this.props.handleSuccess
           }
           */
-          this.props.history.push("/Login");
+          if (response.status == 200)
+          {
+            swal("Successful!", "Welcome, Please Login!", "success");
+            this.props.history.push("/Login");
+            window.location.reload();
+          }
+          else if(response.status == 500)
+          {
+            swal("Attention!", "You should write a unique email!", "error");
+          }
+          
         }
         )
         .catch(function (error) {
           console.log("in error");
           console.log(error.response.data);
+          swal("Attention!", "You should write a unique email or username!", "error");
         });
       }
       else if (this.state.name !="" || this.state.email !="" || this.state.password !="") 
       {
         console.log("You did not agree to the terms!");
-        swal("Attention!", "You shouldn't left empty!", "error");
-        /*
-        const alert = alert.show('Some message', {
-          timeout: 2000, // custom timeout just for this one alert
-          type: 'success',
-         
-        });
-        */
+        swal("Attention!", "You did not agree to the terms!", "error");
+       
       }
       else {
         console.log("You did not agree to the terms!");
-        swal("Attention!", "You did not agree to the terms!", "error");
+        swal("Attention!", "You shouldn't left empty!", "error");
       }
+  }
+  goSignInPage()
+  {
+    window.location.reload();
   }
 
   render() {
@@ -90,7 +102,7 @@ class SignUpForm extends Component {
               type="text"
               id="name"
               className="formFieldInput"
-              placeholder="Enter your full name"
+              placeholder="Enter your username"
               name="name"
               value={this.state.name}
               onChange={this.handleChange}
@@ -145,10 +157,11 @@ class SignUpForm extends Component {
 
           <div className="formField" style={{ display: 'flex', justifyContent: 'left', padding: 5, margin: 10 }}>
             <button className="formFieldButton">Sign Up</button>{" "}
-            <div style={{ margin: 5 }}> </div>
+            <div style={{ margin: 5 }}> 
             <Link to="/Login" className="formFieldLink">
               I'm already member
             </Link>
+          </div>
           </div>
         </form>
         </div>

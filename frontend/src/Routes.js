@@ -11,7 +11,7 @@ import SignUpForm from "./Login/SignUpForm";
 import Cart from "./CartPage/CartPageReal";
 import PaymentPage from "./PaymentPage/PaymentPage";
 import Like from "./LikePage/Likes";
-//import Forget from "../../data_mongodb/nicepage";
+import Forget from "./ForgetYourPassPage/Forget";
 import DesignIdeas from "./DesignIdeas/DesignIdeasPage";
 import Products1 from "./Product/Products1";
 import Products2 from "./Product/Products2";
@@ -30,6 +30,7 @@ export default class Routes extends Component {
                     <Route path="/SignUp" component={SignUpForm} />
                     <Route path="/CartPage" component={Cart} />
                     <Route path="/LikePage" component={Like} />
+                    <Route path="/Forget" component={Forget} />
                     <Route path="/Products1" component={Products1} />
                     <Route path="/Products2" component={Products2} />
                     <Route path="/Products3" component={Products3} />

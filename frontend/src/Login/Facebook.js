@@ -3,6 +3,52 @@ import  FacebookLogin  from 'react-facebook-login';
 
 
 export default class Facebook extends Component {
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+          email: "",
+          password: "",
+          name: "",
+          hasAgreed: false
+        };
+    
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+      }
+    
+      handleChange(event) {
+        this.setState({
+          [event.target.name]: event.target.value
+        });
+      }
+    
+      handleSubmit(e) {
+        e.preventDefault();
+    
+        console.log("The form was submitted with the following data:");
+        console.log(this.state);
+        axios
+            .post('http://localhost:3003/add_user',
+                {
+                "username": this.state.name,
+                "name": this.state.name,
+                "email": this.state.email,
+                "password": this.state.password,
+                })
+                .then(response => {
+                console.log("in response");
+                console.log(response);
+                
+                this.props.history.push("/Login");
+                }
+                )
+                .catch(function (error) {
+                console.log("in error");
+                console.log(error.response.data);
+                });
+      }
+
     state ={
         
         isLoggedIn: false,
@@ -21,7 +67,7 @@ export default class Facebook extends Component {
             picture: response.picture.data.url
         });
     };
-    componentClicked = () => console.log("clicked");
+    componentClicked = () => this.handleSubmit;
     render() {
         let fbContent;
         if(this.state.isLoggedIn)
