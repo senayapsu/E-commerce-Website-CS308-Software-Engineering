@@ -7,6 +7,8 @@ const ProductSchema = new mongoose.Schema({
     price: {type: Number, default: false, required: false},
     image: {type: String, default: false, required: false},
     isLiked: {type: Boolean, deafult: false, required: false},
+    cart_counter : {type: Number, default: false, required: false},
+    designcategory: {type: String, required: false}
 });
 
 const Product = mongoose.model("Product", ProductSchema);

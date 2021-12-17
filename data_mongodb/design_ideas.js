@@ -7,6 +7,7 @@ const DesignSchema = new mongoose.Schema({
     total_price_in_photo: {type: Number, default: false, required: false},
     image: {type: String, default: false, required: false},
     like_number: {type: Number, default: false, required: false},
+    designcategory: {type: String, required: false},
 });
 
 const Design = mongoose.model("Design", DesignSchema);

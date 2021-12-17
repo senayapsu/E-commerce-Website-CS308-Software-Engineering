@@ -51,17 +51,17 @@ const like = async (what) => {
   };
   var goLink = (what) =>
   {
-      if(what == "GARDEN")
+      if(what == "design1")
       {
-        return '/Products1';
+        return '/Products4';
       }
-      else if(what == "FURNITURE")
+      else if(what == "design2")
       {
-        return "/Products3";
+        return "/Products5";
       }
       else
       {
-        return "/Products2";
+        return "/Products6";
       }
 
   };
@@ -99,9 +99,9 @@ const Design = ({design}) => {
                     </Typography>
                 </div>
                 <div>
-                <form action={goLink(design.category)} method="get">
+                <form action={goLink(design.designcategory)} method="get">
                     <Button variant="contained" type='submit'>
-                        Products of {design.category}
+                        See the products of this design
                     </Button>
                 </form>
                 </div>

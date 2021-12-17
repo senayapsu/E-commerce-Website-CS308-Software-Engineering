@@ -246,7 +246,7 @@ class PaymentPage extends Component {
                         <SummaryTitle>ORDER SUMMARY</SummaryTitle>
                         <SummaryItem>
                             <SummaryItemText>Total</SummaryItemText>
-                            <SummaryItemPrice>$60</SummaryItemPrice>
+                            <SummaryItemPrice>${localStorage.getItem("cartTotal")}</SummaryItemPrice>
                         </SummaryItem>
                         <SummaryItem>
                             <SummaryItemText>Estimated Shipping</SummaryItemText>

@@ -78,6 +78,18 @@ app.get("/users", async (request, response) => {
     }
   });
 
+  app.post("/add_cart_quantity", async (request, response) => {
+    products=await ProductModel.findOne({name:request.body.name})
+    product1=new ProductModel(products)
+    product1.cart_counter=request.body.number
+    users=await userModel.findOneAndUpdate({email:request.body.email},{$addToSet:{cartlist:product1}})
+    try {
+      await users.save();
+      response.send(users);
+    } catch (error) {
+      response.status(500).send(error);
+    }});
+
   app.post("/cart", async (request, response) => {
     const users = await userModel.findOne({email:request.body.email});
   
@@ -99,6 +111,29 @@ app.get("/users", async (request, response) => {
       //assign category
       if(req.query.category && req.query.category != 'All'){
         query.category=req.query.category;
+      }
+  
+    try{
+      let products=await ProductModel.find(query);
+      console.log(products);
+      res.send(products);
+      
+    }catch(error){
+      console.log(error);
+      res.status(500).send('Error to get products');
+    }
+  });
+  app.get('/designsearch', async(req,res) => {
+    const query={};
+    if(req.query.search){
+      query.name= {
+        $regex: req.query.search,
+        $options: 'i'
+      }
+    }
+      //assign category
+      if(req.query.designcategory && req.query.designcategory != 'All'){
+        query.designcategory=req.query.designcategory;
       }
   
     try{

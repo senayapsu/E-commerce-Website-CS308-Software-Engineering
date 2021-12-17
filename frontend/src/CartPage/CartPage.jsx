@@ -157,13 +157,45 @@ const getProducts = async () => {
     return res.data;
 };
 
+const setProduct = (count, name) => {
+    var res = axios.post('http://localhost:3003/discard_cart_product', {
+        "name": name,
+        "email": user.email,
+    }).then(r => {
+        console.log("discarded");
+        if (count > 0) {
+            axios.post('http://localhost:3003/add_cart_quantity', {
+                "name": name,
+                "email": user.email,
+                "number": count,
+            }).then(() => {
+                window.location.reload();
+            })
+        } else {
+            swal(":(", "Discarded!", "success").then(()=> {
+                window.location.reload();
+            });
+        }
+    })
+}
+
+const getTotalPrice = (products) => {
+    let total = 0;
+    products.forEach(product => {
+        total += product.price*product.cart_counter;
+    });
+    localStorage.setItem("cartTotal", total);
+    return total;
+} 
+
 const CartPage = () => {
     const [apiResponse, setApiResponse] = useState([]);
+    const [dummy, setDummy] = useState(1);
 
     useEffect(() => {
       getProducts().then(
         (res) => setApiResponse(res));
-    }, [])
+    }, [dummy])
     return (
         <Container>
             <Wrapper>
@@ -199,12 +231,12 @@ const CartPage = () => {
 
                             <PriceDetail>
                                 <ProductAmountContainer>
-                                <IconButton><AddIcon/></IconButton>
+                                <IconButton><AddIcon onClick = {() => {setProduct(product.cart_counter+1, product.name); setDummy(dummy+1)}}/></IconButton>
                                     
-                                    <ProductAmount>1</ProductAmount>
-                                    <IconButton><RemoveIcon onClick = {() => {discardCart(product.name)}}/></IconButton>
+                                    <ProductAmount>{product.cart_counter}</ProductAmount>
+                                    <IconButton><RemoveIcon onClick = {() => {setProduct(product.cart_counter-1, product.name); setDummy(dummy+1)}}/></IconButton>
                                 </ProductAmountContainer>
-                                <ProductPrice>${product.price}</ProductPrice>
+                                <ProductPrice>${product.price*product.cart_counter}</ProductPrice>
                             </PriceDetail>
                             
                         </Product>
@@ -215,7 +247,7 @@ const CartPage = () => {
                     <SummaryTitle>ORDER SUMMARY</SummaryTitle>
                     <SummaryItem>
                         <SummaryItemText>Total</SummaryItemText>
-                        <SummaryItemPrice>$60</SummaryItemPrice>
+                        <SummaryItemPrice>${getTotalPrice(apiResponse)}</SummaryItemPrice>
                     </SummaryItem>
                     <SummaryItem>
                         <SummaryItemText>Estimated Shipping</SummaryItemText>
