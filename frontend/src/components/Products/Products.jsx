@@ -48,7 +48,7 @@ const Products = (props) => // Produtcs var. is a fuction which does not take a 
         .get('http://localhost:3003/users')
           .then(response => {
             var loggedUser;
-            if (response.status == 200) {
+            if (response.status == 200 && user) {
               var isSuccess = false;
               response.data.forEach(user2 => {
                 if ((user2.email == user.email)) {
@@ -63,6 +63,7 @@ const Products = (props) => // Produtcs var. is a fuction which does not take a 
           }).then(() => {
             getProducts().then(
               (res) => {
+                if (user) {
                 res.forEach((item) => {
                   user.likes.forEach((liked) => {
                     if (item.name == liked.name) {
@@ -70,6 +71,7 @@ const Products = (props) => // Produtcs var. is a fuction which does not take a 
                     }
                   })
                 });
+              }
                 console.log("Got products!");
                 setApiResponse(res);
             });
