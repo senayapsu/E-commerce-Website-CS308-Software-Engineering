@@ -4,10 +4,10 @@ import Product from './Product/Product';
 import useStyles from './styles';
 import axios from "axios";
 
-
+var user = JSON.parse(localStorage.getItem("user"));
 const getProducts = async () => {
 
-    const res = await axios.get("http://localhost:3003/search?category=Furniture");
+    const res = await axios.get("https://lapss-cs308.herokuapp.com/search?category=Furniture");
     console.log(res.data);
     return res.data;
 
@@ -20,8 +20,38 @@ const Products3 = (props) => // Produtcs var. is a fuction which does not take a
     const classes = useStyles();
     
     useEffect(() => {
-      getProducts().then(
-        (res) => setApiResponse(res));
+      axios
+        .get('https://lapss-cs308.herokuapp.com/users')
+          .then(response => {
+            var loggedUser;
+            if (response.status == 200 && user) {
+              var isSuccess = false;
+              response.data.forEach(user2 => {
+                if ((user2.email == user.email)) {
+                  isSuccess = true;
+                  user = user2;
+                  loggedUser = JSON.stringify(user2);
+                  console.log("Updated user!");
+                }
+              });
+              localStorage.setItem("user", loggedUser);
+            }
+          }).then(() => {
+            getProducts().then(
+              (res) => {
+                if (user) {
+                res.forEach((item) => {
+                  user.likes.forEach((liked) => {
+                    if (item.name == liked.name) {
+                      item.isLiked = true;
+                    }
+                  })
+                });
+              }
+                console.log("Got products!");
+                setApiResponse(res);
+            });
+          })
     }, [])
 
     return (

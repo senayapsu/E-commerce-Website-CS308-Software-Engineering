@@ -101,7 +101,7 @@ var userClick = false;
 var products = [];
 
 const getProducts = async (what) => {
-  var res = await axios.get('http://localhost:3003/search?search=' + what)
+  var res = await axios.get('https://lapss-cs308.herokuapp.com/search?search=' + what)
   products = res.data;
   return res.data;
 };

@@ -27,7 +27,7 @@ class Forget extends Component {
     if(this.state.email !="") {
       
     axios
-      .post('http://localhost:3003/change_password',
+      .post('https://lapss-cs308.herokuapp.com/change_password',
         {
           "email": this.state.email,
         })

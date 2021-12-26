@@ -12,7 +12,7 @@ const Hr = styled.hr`
 `;
 const getProducts = async () => {
 
-    const res = await axios.get("http://localhost:3003/design_ideas");
+    const res = await axios.get("https://lapss-cs308.herokuapp.com/design_ideas");
     console.log(res.data);
     return res.data;
 

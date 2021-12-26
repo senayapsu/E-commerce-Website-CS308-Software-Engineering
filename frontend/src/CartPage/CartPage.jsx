@@ -137,7 +137,7 @@ const discardCart = async (what) => {
         console.log("you are not logged in");
         return;
     }
-    var res = await axios.post('http://localhost:3003/discard_cart_product', {
+    var res = await axios.post('https://lapss-cs308.herokuapp.com/discard_cart_product', {
         "name": what,
         "email": user.email,
     })
@@ -149,7 +149,7 @@ const discardCart = async (what) => {
     
   };
 const getProducts = async () => {
-    const res = await axios.post("http://localhost:3003/cart", 
+    const res = await axios.post("https://lapss-cs308.herokuapp.com/cart", 
     {
         "email": user.email,
     })
@@ -158,13 +158,13 @@ const getProducts = async () => {
 };
 
 const setProduct = (count, name) => {
-    var res = axios.post('http://localhost:3003/discard_cart_product', {
+    var res = axios.post('https://lapss-cs308.herokuapp.com/discard_cart_product', {
         "name": name,
         "email": user.email,
     }).then(r => {
         console.log("discarded");
         if (count > 0) {
-            axios.post('http://localhost:3003/add_cart_quantity', {
+            axios.post('https://lapss-cs308.herokuapp.com/add_cart_quantity', {
                 "name": name,
                 "email": user.email,
                 "number": count,

@@ -36,7 +36,7 @@ class SignInForm extends Component {
     console.log("The form was submitted with the following data:");
     console.log(this.state);
     axios
-      .get('http://localhost:3003/users')
+      .get('https://lapss-cs308.herokuapp.com/users')
         .then(response => {
           console.log("in response");
           console.log(response);

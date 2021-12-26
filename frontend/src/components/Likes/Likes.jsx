@@ -7,7 +7,7 @@ import axios from "axios";
 var user = JSON.parse(localStorage.getItem("user"));
 
 const getProducts = async () => {
-    const res = await axios.post("http://localhost:3003/likes", 
+    const res = await axios.post("https://lapss-cs308.herokuapp.com/likes", 
     {
         "email": user.email,
     })

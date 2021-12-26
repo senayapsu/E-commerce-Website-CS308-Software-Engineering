@@ -24,7 +24,7 @@ const like = async (what) => {
     }
     swal("<3", "You liked the item!", "success");
     var isLiked = true;
-    var res = await axios.post('http://localhost:3003/add_1_like_design', {
+    var res = await axios.post('https://lapss-cs308.herokuapp.com/add_1_like_design', {
         "Title": title,
     })
     console.log(res);
@@ -42,7 +42,7 @@ const like = async (what) => {
     }
     swal("</3", "You disliked the item!", "success");
     var isLiked = true;
-    var res = await axios.post('http://localhost:3003/dec_1_like_design', {
+    var res = await axios.post('https://lapss-cs308.herokuapp.com/dec_1_like_design', {
         "Title": title,
     })
     console.log(res);

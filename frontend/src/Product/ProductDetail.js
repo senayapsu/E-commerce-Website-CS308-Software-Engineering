@@ -141,11 +141,11 @@ const RightPanImage = styled.img`
     width: 170px;
     height: 85px;
 `;
-//http://localhost:3003/get_single_product?productId=... 
+//https://lapss-cs308.herokuapp.com/get_single_product?productId=... 
 
 var  product_array=[];
 const getProduct = async (what) => {
-    var res = await axios.get('http://localhost:3003/get_single_product?productId='+what);
+    var res = await axios.get('https://lapss-cs308.herokuapp.com/get_single_product?productId='+what);
     product_array.push(res.data);
     return product_array;
   };
@@ -228,7 +228,7 @@ const ProductDetailPage = (props) => {
                                     }
 
                                     swal("+1", "The item is added to your cart!", "success");
-                                    var res = axios.post('http://localhost:3003/add_product_to_cart', {
+                                    var res = axios.post('https://lapss-cs308.herokuapp.com/add_product_to_cart', {
                                         "name": product.name,
                                         "email": user.email,
                                     })

@@ -29,7 +29,7 @@ export default class Facebook extends Component {
         console.log("The form was submitted with the following data:");
         console.log(this.state);
         axios
-            .post('http://localhost:3003/add_user',
+            .post('https://lapss-cs308.herokuapp.com/add_user',
                 {
                 "username": this.state.name,
                 "name": this.state.name,

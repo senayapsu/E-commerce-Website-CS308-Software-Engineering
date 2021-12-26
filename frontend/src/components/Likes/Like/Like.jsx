@@ -17,7 +17,7 @@ const addLikes = async (what) => {
         console.log("you are not logged in");
         return;
     }
-    var res = await axios.post('http://localhost:3003/everything_for_like', {
+    var res = await axios.post('https://lapss-cs308.herokuapp.com/everything_for_like', {
         "name": what,
         "email": user.email,
     })
@@ -35,7 +35,7 @@ const addLikes = async (what) => {
         return;
     }
     swal("+1", "The item is added to your cart!", "success");
-    var res = await axios.post('http://localhost:3003/add_product_to_cart', {
+    var res = await axios.post('https://lapss-cs308.herokuapp.com/add_product_to_cart', {
         "name": what,
         "email": user.email,
     })

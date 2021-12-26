@@ -17,7 +17,7 @@ const products = [
 ];
 
 var products = [];
-axios.get("http://localhost:3003/products")
+axios.get("https://lapss-cs308.herokuapp.com/products")
 .then((res) => {
   console.log(res);
   products = res.data;
@@ -31,7 +31,7 @@ axios.get("http://localhost:3003/products")
 var user = JSON.parse(localStorage.getItem("user"));
 const getProducts = async () => {
 
-    const res = await axios.get("http://localhost:3003/products");
+    const res = await axios.get("https://lapss-cs308.herokuapp.com/products");
     console.log(res.data);
     return res.data;
 
@@ -45,7 +45,7 @@ const Products = (props) => // Produtcs var. is a fuction which does not take a 
     
     useEffect(() => {
       axios
-        .get('http://localhost:3003/users')
+        .get('https://lapss-cs308.herokuapp.com/users')
           .then(response => {
             var loggedUser;
             if (response.status == 200 && user) {

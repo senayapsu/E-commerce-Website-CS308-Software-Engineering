@@ -37,7 +37,7 @@ class SignUpForm extends Component {
     if(this.state.hasAgreed && this.state.name !="" && this.state.email !="" && this.state.password !="") {
       
     axios
-      .post('http://localhost:3003/add_user',
+      .post('https://lapss-cs308.herokuapp.com/add_user',
         {
           "username": this.state.name,
           "name": this.state.name,
